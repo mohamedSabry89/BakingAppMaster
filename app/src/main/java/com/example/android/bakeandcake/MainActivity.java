@@ -36,13 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-      /*  com = new Component(0, "111", "222", "333");
-        componentList.add(com);
-        com = new Component(0, "333", "111", "222");
-        componentList.add(com);
-        com = new Component(0, "222", "333", "111");
-        componentList.add(com);*/
-
         recyclerView = (RecyclerView) findViewById(R.id.rv_reciep);
         extractRecipeJson();
     }
@@ -57,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
                         Component component = new Component();
-                        component.setName(jsonObject.getString("name").toString());
-                        component.setServings(jsonObject.getString("servings").toString());
+                        component.setName(jsonObject.getString("name"));
+                        component.setServings(jsonObject.getString("servings"));
                         componentList.add(component);
                     } catch (JSONException e) {
                         e.printStackTrace();

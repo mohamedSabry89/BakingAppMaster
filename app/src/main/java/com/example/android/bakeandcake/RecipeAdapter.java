@@ -38,6 +38,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
         bakeName.setText(component.getName());
         servings.setText(component.getServings());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
