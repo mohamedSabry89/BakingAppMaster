@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public List<Component> componentList = new ArrayList<>();
     public Context context;
     public RecyclerView.LayoutManager layoutManager;
-    Component com;
+
     private final static String URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
     @Override
@@ -61,8 +61,11 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
-
-
+                        Component component = new Component();
+                        component.setName(jsonObject.getString("name").toString());
+                        component.setServings(jsonObject.getString("servings").toString());
+                        componentList.add(component);
+                        
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
