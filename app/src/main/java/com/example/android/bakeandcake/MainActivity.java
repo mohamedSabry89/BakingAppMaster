@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
     public List<Component> componentList = new ArrayList<>();
     public Context context;
-    public RecyclerView.LayoutManager layoutManager;
 
     private final static String URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
@@ -44,11 +44,6 @@ public class MainActivity extends AppCompatActivity {
         componentList.add(com);*/
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_reciep);
-        layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recipeAdapter = new RecipeAdapter(context, componentList);
-        recipeAdapter.setMovies(componentList);
-        recyclerView.setAdapter(recipeAdapter);
         extractRecipeJson();
     }
 
@@ -65,19 +60,20 @@ public class MainActivity extends AppCompatActivity {
                         component.setName(jsonObject.getString("name").toString());
                         component.setServings(jsonObject.getString("servings").toString());
                         componentList.add(component);
-                        
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
+                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recipeAdapter = new RecipeAdapter(context, componentList);
+                recyclerView.setAdapter(recipeAdapter);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.d("tag", "onErrorResponse" + error.getMessage());
             }
         });
+        requestQueue.add(jsonRequest);
     }
-
-
 }
