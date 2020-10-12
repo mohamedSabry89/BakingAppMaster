@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">BakeAndCake</string>
+    <string name="json_id">id</string>
+    <string name="json_name">name</string>
+    <string name="json_ingredients">ingredients</string>
+    <string name="json_steps">steps</string>
+    <string name="json_servings">servings</string>
+    <string name="json_image">image</string>
+    <string name="servings">Servings :</string>
+
+</resources>
