@@ -1,6 +1,7 @@
 package com.example.android.bakeandcake;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     public RecipeAdapter recipeAdapter;
     public RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
     public List<Component> componentList = new ArrayList<>();
     public Context context;
 
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_reciep);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         extractRecipeJson();
     }
 
@@ -57,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recipeAdapter = new RecipeAdapter(context, componentList);
                 recyclerView.setAdapter(recipeAdapter);
             }
