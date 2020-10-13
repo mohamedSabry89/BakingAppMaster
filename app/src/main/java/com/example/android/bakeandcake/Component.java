@@ -3,19 +3,27 @@ package com.example.android.bakeandcake;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Component implements Parcelable {
+
 
     private int id;
     private String name;
+    private List<Ingredients> ingredientsList;
+    private List<Steps> stepsList;
     private String servings;
     private String image;
 
     public Component() {
     }
 
-    public Component(int id, String name, String servings, String image) {
+    public Component(int id, String name, List<Ingredients> ingredientsList, List<Steps> stepsList, String servings, String image) {
         this.id = id;
         this.name = name;
+        this.ingredientsList = ingredientsList;
+        this.stepsList = stepsList;
         this.servings = servings;
         this.image = image;
     }
@@ -23,6 +31,10 @@ public class Component implements Parcelable {
     protected Component(Parcel in) {
         id = in.readInt();
         name = in.readString();
+        ingredientsList = new ArrayList<>();
+        in.readList(ingredientsList, Ingredients.class.getClassLoader());
+        stepsList = new ArrayList<>();
+        in.readList(stepsList, Steps.class.getClassLoader());
         servings = in.readString();
         image = in.readString();
     }
@@ -76,10 +88,28 @@ public class Component implements Parcelable {
         return 0;
     }
 
+    public List<Ingredients> getIngredientsList() {
+        return ingredientsList;
+    }
+
+    public void setIngredientsList(List<Ingredients> ingredientsList) {
+        this.ingredientsList = ingredientsList;
+    }
+
+    public List<Steps> getStepsList() {
+        return stepsList;
+    }
+
+    public void setStepsList(List<Steps> stepsList) {
+        this.stepsList = stepsList;
+    }
+
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeString(name);
+        parcel.writeList(ingredientsList);
+        parcel.writeList(stepsList);
         parcel.writeString(servings);
         parcel.writeString(image);
     }
