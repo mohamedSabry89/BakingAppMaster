@@ -11,16 +11,27 @@ public class IngredientsJsonUtils {
 
     public static Ingredients[] parseIngredientsJson(Context context, String json) throws JSONException {
 
+        final String MAIN_ID = "id";
+        final String MAIN_NAME = "name";
         final String MAIN_INGREDIENT = "ingredients";
+        final String MAIN_STEPS = "steps";
+        final String MAIN_SERVINGS = "servings";
+
         final String QTY = "quantity";
         final String MEASURE = "measure";
         final String INGREDIENTS = "ingredient";
+
+        final String STEPS_ID = "id";
+        final String STEPS_SHORT_DESC = "shortDescription";
+        final String STEPS_DESC = "description";
+        final String STEPS_VIDEOS_URL = "videoURL";
+        final String STEPS_THUMBNAIL_URL = "thumbnailURL";
 
         JSONObject mainJsonObject = new JSONObject(json);
         JSONArray mainIngredients = mainJsonObject.getJSONArray(MAIN_INGREDIENT);
         Ingredients[] ingredients = new Ingredients[(mainIngredients.length())];
 
-        for (int i = 0; i < ingredients.length; i++) {
+        for (int i = 0; i < mainIngredients.length(); i++) {
             String theMeasure, theIngredient;
             int theQty;
             Ingredients ing = new Ingredients();

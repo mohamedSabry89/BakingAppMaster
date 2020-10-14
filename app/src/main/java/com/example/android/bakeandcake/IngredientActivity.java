@@ -1,10 +1,12 @@
 package com.example.android.bakeandcake;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,13 +24,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.json.JSONException;
 import org.w3c.dom.Text;
 
 public class IngredientActivity extends AppCompatActivity {
 
     private IngredientsAdapter ingredientsAdapter;
     private RecyclerView recyclerView;
-    private List<Ingredients> ingredientsArrayList = new ArrayList<>();
+    private List<Ingredients> ingredientsArrayList;
     private Context context;
     public RecyclerView.LayoutManager layoutManager;
     Ingredients ingredients;
@@ -46,18 +50,31 @@ public class IngredientActivity extends AppCompatActivity {
         measure = (TextView) findViewById(R.id.ingredients_measure);
         desc = (TextView) findViewById(R.id.ingredients_desc);
 
-        Intent intent = getIntent();
-        ingredientsArrayList = intent.getParcelableExtra("id");
-        // ingredientsArrayList = component.getIngredientsList();
+
+
+        //Intent intent = getIntent();
+        //ingredientsArrayList = intent.getParcelableExtra("id");
+        //ingredientsArrayList = component.getIngredientsList();
+
+        //theQty = ingredients.getQuantity();
+        //theMeasure = ingredients.getMeasure();
+        //theDesc = ingredients.getIngredient();
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_ingredients);
-        ingredientsAdapter = new IngredientsAdapter(context, ingredientsArrayList);
 
-        // qty.setText(theQty);
+        new getIngredientsJson().execute();
+
+        layoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        ingredientsAdapter = new IngredientsAdapter(context, ingredientsArrayList);
+        recyclerView.setAdapter(ingredientsAdapter);
+        Log.d("log", "what is wrong1 : " + ingredientsArrayList);
+
+        //qty.setText(theQty);
         //measure.setText(theMeasure);
         //desc.setText(theDesc);
 
-        new getIngredientsJson();
     }
 
     public class getIngredientsJson extends AsyncTask<String, Void, String> {
@@ -69,6 +86,7 @@ public class IngredientActivity extends AppCompatActivity {
             try {
                 URL url = new URL(buildUri.toString());
                 urlSearchResult = getResponseFromHttpUrl(url);
+                Log.d("log", "what is wrong3 : " + urlSearchResult);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -78,10 +96,17 @@ public class IngredientActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            layoutManager = new LinearLayoutManager(getApplicationContext());
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(ingredientsAdapter);
+            try {
+                ingredientsArrayList = Arrays.asList(IngredientsJsonUtils.parseIngredientsJson(IngredientActivity.this, s));
+                Log.d("log", "what is wrong2 : " + ingredientsArrayList);
+                layoutManager = new LinearLayoutManager(IngredientActivity.this);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                ingredientsAdapter = new IngredientsAdapter(IngredientActivity.this, ingredientsArrayList);
+                recyclerView.setAdapter(ingredientsAdapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
