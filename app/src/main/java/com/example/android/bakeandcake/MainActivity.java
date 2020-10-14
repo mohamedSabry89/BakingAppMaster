@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
                         Component component = new Component();
+                        component.setId(jsonObject.getInt("id"));
                         component.setName(jsonObject.getString("name"));
                         component.setServings(jsonObject.getString("servings"));
                         componentList.add(component);

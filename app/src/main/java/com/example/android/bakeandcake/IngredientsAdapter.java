@@ -35,6 +35,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         TextView qty, measure, ingredient;
         final Ingredients ingredients = ingredientsList.get(position);
+
         qty = (TextView) holder.tv1.findViewById(R.id.ingredients_quantity);
         measure = (TextView) holder.tv2.findViewById(R.id.ingredients_measure);
         ingredient = (TextView) holder.tv3.findViewById(R.id.ingredients_desc);

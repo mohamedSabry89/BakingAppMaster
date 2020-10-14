@@ -2,6 +2,8 @@ package com.example.android.bakeandcake;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,12 +36,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecipeViewHolder holder, final int position) {
 
         TextView bakeName, servings;
 
         final Component component = components.get(position);
         final int id = component.getId();
+        final List<Ingredients> ingredients = component.getIngredientsList();
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
@@ -51,7 +54,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), IngredientActivity.class);
-                intent.putExtra("id", id);
+                intent.putExtra("id", (Parcelable) ingredients);
+                Log.d("log", "the id is : " + id);
+                Log.d("log", "the id is : " + position);
                 view.getContext().startActivity(intent);
             }
         });
