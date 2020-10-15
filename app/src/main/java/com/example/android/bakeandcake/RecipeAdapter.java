@@ -58,6 +58,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
                 Log.d("log", "the id is : " + id);
                 Log.d("log", "the id is : " + position);
                 //Log.d("log", "the id is : " + ingredients);
+                intent.putExtra("recipe", component);
 
                 view.getContext().startActivity(intent);
             }

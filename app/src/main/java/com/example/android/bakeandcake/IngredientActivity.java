@@ -52,8 +52,8 @@ public class IngredientActivity extends AppCompatActivity {
 
 
 
-        //Intent intent = getIntent();
-        //ingredientsArrayList = intent.getParcelableExtra("id");
+        Intent intent = getIntent();
+        ingredientsArrayList = intent.getParcelableArrayListExtra("recipe");
         //ingredientsArrayList = component.getIngredientsList();
 
         //theQty = ingredients.getQuantity();
