@@ -55,9 +55,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), IngredientActivity.class);
                 intent.putExtra("ingredient_list", gettingIngredients);
+                intent.putExtra("steps_list", component.getStepsList());
+
                 Log.d("log", "the id is : " + id);
                 Log.d("log", "the id is : " + position);
                 Log.d("log", "the ingredient is : " + gettingIngredients);
+                Log.d("log", "getting Step List : " + component.getStepsList());
 
                 view.getContext().startActivity(intent);
             }

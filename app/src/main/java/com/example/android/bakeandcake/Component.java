@@ -12,14 +12,14 @@ public class Component implements Parcelable {
     private int id;
     private String name;
     private String ingredientsList;
-    private List<Steps> stepsList;
+    private ArrayList<Steps> stepsList;
     private String servings;
     private String image;
 
     public Component() {
     }
 
-    public Component(int id, String name, String ingredientsList, List<Steps> stepsList, String servings, String image) {
+    public Component(int id, String name, String ingredientsList, ArrayList<Steps> stepsList, String servings, String image) {
         this.id = id;
         this.name = name;
         this.ingredientsList = ingredientsList;
@@ -95,11 +95,11 @@ public class Component implements Parcelable {
         this.ingredientsList = ingredientsList;
     }
 
-    public List<Steps> getStepsList() {
+    public ArrayList<Steps> getStepsList() {
         return stepsList;
     }
 
-    public void setStepsList(List<Steps> stepsList) {
+    public void setStepsList(ArrayList<Steps> stepsList) {
         this.stepsList = stepsList;
     }
 

@@ -29,8 +29,9 @@ import org.w3c.dom.Text;
 
 public class IngredientActivity extends AppCompatActivity {
 
+    private StepsAdapter stepsAdapter;
     private RecyclerView recyclerView;
-    private List<Ingredients> ingredientsArrayList;
+    private ArrayList<Steps> steps;
     private Context context;
     public RecyclerView.LayoutManager layoutManager;
     TextView ingredientTextView;
@@ -44,11 +45,17 @@ public class IngredientActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String ingredients = intent.getStringExtra("ingredient_list");
+        steps = intent.getParcelableArrayListExtra("steps_list");
 
         //new getIngredientsJson().execute();
         ingredientTextView.setText(ingredients);
         Log.d("log", "what is wrong1 : " + ingredients);
 
+        recyclerView = findViewById(R.id.rv_steps);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        stepsAdapter = new StepsAdapter(context, steps);
+        recyclerView.setAdapter(stepsAdapter);
 
     }
 

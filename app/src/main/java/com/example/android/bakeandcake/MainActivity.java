@@ -27,20 +27,18 @@ public class MainActivity extends AppCompatActivity {
 
     public RecipeAdapter recipeAdapter;
     public RecyclerView recyclerView;
-    private LinearLayoutManager layoutManager;
     public List<Component> componentList = new ArrayList<>();
     public Context context;
-    private List<Ingredients> ingredientsArrayList;
     private final static String URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-    Ingredients ingredients;
+    ArrayList<ArrayList<Steps>> gettingSteps = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_reciep);
-        layoutManager = new LinearLayoutManager(this);
+        recyclerView = findViewById(R.id.rv_reciep);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         extractRecipeJson();
@@ -56,12 +54,11 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
                         Component component = new Component();
-                        Ingredients ingredients = new Ingredients();
                         component.setId(jsonObject.getInt("id"));
                         component.setName(jsonObject.getString("name"));
                         component.setServings(jsonObject.getString("servings"));
 
-                        String theIngredients = "";
+                        StringBuilder theIngredients = new StringBuilder();
                         JSONArray ingredientsJson = jsonObject.getJSONArray("ingredients");
                         for (int ing = 0; ing < ingredientsJson.length(); ing++) {
                             JSONObject ingObject = ingredientsJson.getJSONObject(ing);
@@ -70,13 +67,26 @@ public class MainActivity extends AppCompatActivity {
                             ingredients1.setMeasure(ingObject.getString("measure"));
                             ingredients1.setIngredient(ingObject.getString("ingredient"));
 
-                            theIngredients += (ingredients1.getQuantity() + " " +
-                                    ingredients1.getMeasure() + "\t\t" + ingredients1.getIngredient() + "\n");
+                            theIngredients.append(ingredients1.getQuantity()).append(" ").append(ingredients1.getMeasure()).append("\t\t").append(ingredients1.getIngredient()).append("\n");
                         }
-                        component.setIngredientsList(theIngredients);
-                        Log.i("LOG", "The Ingredients List is : " + theIngredients);
+                        component.setIngredientsList(theIngredients.toString());
+
+                        ArrayList<Steps> theSteps = new ArrayList<>();
+                        JSONArray stepsJson = jsonObject.getJSONArray("steps");
+                        for (int s = 0; s < stepsJson.length(); s++) {
+                            JSONObject stepsObject = stepsJson.getJSONObject(s);
+                            Steps steps = new Steps();
+                            steps.setStepsId(stepsObject.getInt("id"));
+                            steps.setShortDescription(stepsObject.getString("shortDescription"));
+                            steps.setDescription(stepsObject.getString("description"));
+                            steps.setVideoURL(stepsObject.getString("videoURL"));
+                            steps.setThumbnailURL(stepsObject.getString("thumbnailURL"));
+
+                            theSteps.add(steps);
+                        }
+                        component.setStepsList(theSteps);
+                        Log.d("tag", "The Step List Is : " + component.getStepsList());
                         componentList.add(component);
-                        Log.d("tag", "onErrorResponse : " + ingredientsArrayList);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
