@@ -6,7 +6,6 @@
     <TextView
         android:id="@+id/tv_Steps"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Step..." />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
