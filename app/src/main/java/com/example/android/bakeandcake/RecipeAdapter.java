@@ -42,7 +42,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         final Component component = components.get(position);
         final int id = component.getId();
-        //final List<Ingredients> ingredients = component.getIngredientsList();
+        final String gettingIngredients = component.getIngredientsList();
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
@@ -54,11 +54,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), IngredientActivity.class);
-                //intent.putExtra("id", (Parcelable) ingredients);
+                intent.putExtra("ingredient_list", gettingIngredients);
                 Log.d("log", "the id is : " + id);
                 Log.d("log", "the id is : " + position);
-                //Log.d("log", "the id is : " + ingredients);
-                intent.putExtra("recipe", component);
+                Log.d("log", "the ingredient is : " + gettingIngredients);
 
                 view.getContext().startActivity(intent);
             }

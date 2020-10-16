@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager layoutManager;
     public List<Component> componentList = new ArrayList<>();
     public Context context;
-
+    private List<Ingredients> ingredientsArrayList;
     private final static String URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+    Ingredients ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,27 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
                         Component component = new Component();
+                        Ingredients ingredients = new Ingredients();
                         component.setId(jsonObject.getInt("id"));
                         component.setName(jsonObject.getString("name"));
                         component.setServings(jsonObject.getString("servings"));
+
+                        String theIngredients = "";
+                        JSONArray ingredientsJson = jsonObject.getJSONArray("ingredients");
+                        for (int ing = 0; ing < ingredientsJson.length(); ing++) {
+                            JSONObject ingObject = ingredientsJson.getJSONObject(ing);
+                            Ingredients ingredients1 = new Ingredients();
+                            ingredients1.setQuantity(ingObject.getDouble("quantity"));
+                            ingredients1.setMeasure(ingObject.getString("measure"));
+                            ingredients1.setIngredient(ingObject.getString("ingredient"));
+
+                            theIngredients += (ingredients1.getQuantity() + " " +
+                                    ingredients1.getMeasure() + "\t\t" + ingredients1.getIngredient() + "\n");
+                        }
+                        component.setIngredientsList(theIngredients);
+                        Log.i("LOG", "The Ingredients List is : " + theIngredients);
                         componentList.add(component);
+                        Log.d("tag", "onErrorResponse : " + ingredientsArrayList);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

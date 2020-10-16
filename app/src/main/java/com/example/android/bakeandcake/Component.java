@@ -11,7 +11,7 @@ public class Component implements Parcelable {
 
     private int id;
     private String name;
-    private List<Ingredients> ingredientsList;
+    private String ingredientsList;
     private List<Steps> stepsList;
     private String servings;
     private String image;
@@ -19,7 +19,7 @@ public class Component implements Parcelable {
     public Component() {
     }
 
-    public Component(int id, String name, List<Ingredients> ingredientsList, List<Steps> stepsList, String servings, String image) {
+    public Component(int id, String name, String ingredientsList, List<Steps> stepsList, String servings, String image) {
         this.id = id;
         this.name = name;
         this.ingredientsList = ingredientsList;
@@ -31,8 +31,7 @@ public class Component implements Parcelable {
     protected Component(Parcel in) {
         id = in.readInt();
         name = in.readString();
-        ingredientsList = new ArrayList<>();
-        in.readList(ingredientsList, Ingredients.class.getClassLoader());
+        ingredientsList = in.readString();
         stepsList = new ArrayList<>();
         in.readList(stepsList, Steps.class.getClassLoader());
         servings = in.readString();
@@ -88,11 +87,11 @@ public class Component implements Parcelable {
         return 0;
     }
 
-    public List<Ingredients> getIngredientsList() {
+    public String  getIngredientsList() {
         return ingredientsList;
     }
 
-    public void setIngredientsList(List<Ingredients> ingredientsList) {
+    public void setIngredientsList(String  ingredientsList) {
         this.ingredientsList = ingredientsList;
     }
 
@@ -108,7 +107,7 @@ public class Component implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
         parcel.writeString(name);
-        parcel.writeList(ingredientsList);
+        parcel.writeString(ingredientsList);
         parcel.writeList(stepsList);
         parcel.writeString(servings);
         parcel.writeString(image);
