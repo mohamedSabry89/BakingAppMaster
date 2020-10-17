@@ -43,6 +43,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final Component component = components.get(position);
         final int id = component.getId();
         final String gettingIngredients = component.getIngredientsList();
+        final ArrayList<Steps> theSteps = new ArrayList<>();
+        Steps steps = new Steps();
+
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
@@ -53,16 +56,19 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.itemView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(view.getContext(), IngredientActivity.class);
                 intent.putExtra("ingredient_list", gettingIngredients);
                 intent.putExtra("steps_list", component.getStepsList());
 
                 Log.d("log", "the id is : " + id);
                 Log.d("log", "the id is : " + position);
+                Log.d("log", "the steps is : " + component.getStepsList());
                 Log.d("log", "the ingredient is : " + gettingIngredients);
                 Log.d("log", "getting Step List : " + component.getStepsList());
 
                 view.getContext().startActivity(intent);
+
             }
         });
     }
@@ -73,11 +79,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             return 0;
         }
         return components.size();
-    }
-
-    public void setMovies(List<Component> componentList) {
-        this.components = componentList;
-        notifyDataSetChanged();
     }
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {

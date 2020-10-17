@@ -1,11 +1,13 @@
 package com.example.android.bakeandcake;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -74,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         ArrayList<Steps> theSteps = new ArrayList<>();
                         JSONArray stepsJson = jsonObject.getJSONArray("steps");
                         for (int s = 0; s < stepsJson.length(); s++) {
+
                             JSONObject stepsObject = stepsJson.getJSONObject(s);
                             Steps steps = new Steps();
                             steps.setStepsId(stepsObject.getInt("id"));
@@ -81,8 +84,9 @@ public class MainActivity extends AppCompatActivity {
                             steps.setDescription(stepsObject.getString("description"));
                             steps.setVideoURL(stepsObject.getString("videoURL"));
                             steps.setThumbnailURL(stepsObject.getString("thumbnailURL"));
-
+                            Log.d("tag", "The Step Description List Is : " + steps.getShortDescription());
                             theSteps.add(steps);
+
                         }
                         component.setStepsList(theSteps);
                         Log.d("tag", "The Step List Is : " + component.getStepsList());

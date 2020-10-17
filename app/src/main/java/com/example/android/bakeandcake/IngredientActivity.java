@@ -45,6 +45,7 @@ public class IngredientActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String ingredients = intent.getStringExtra("ingredient_list");
+
         steps = intent.getParcelableArrayListExtra("steps_list");
 
         //new getIngredientsJson().execute();
