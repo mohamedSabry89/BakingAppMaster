@@ -1,6 +1,7 @@
-package com.example.android.bakeandcake;
+package com.example.android.bakeandcake.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.bakeandcake.R;
+import com.example.android.bakeandcake.fragments.StepsFragment;
+import com.example.android.bakeandcake.models.Steps;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
 
@@ -35,11 +39,19 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     @Override
     public void onBindViewHolder(@NonNull StepsAdapter.StepsViewHolder holder, int position) {
 
-        //TextView tvSteps;
         Steps stepList = steps.get(position);
-        //tvSteps = (TextView) holder.theSteps.findViewById(R.id.tv_Steps);
-        holder.theSteps.setText(stepList.getDescription());
-        Log.d("LOG", "lets see : " + stepList.getDescription());
+
+        holder.theSteps.setText(stepList.getShortDescription());
+        Log.d("LOG", "lets see : " + stepList.getShortDescription());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), StepsFragment.class);
+                intent.putExtra("stepList", stepList);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

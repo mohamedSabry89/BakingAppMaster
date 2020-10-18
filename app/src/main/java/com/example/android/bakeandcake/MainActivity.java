@@ -1,13 +1,11 @@
 package com.example.android.bakeandcake;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,6 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.android.bakeandcake.adapters.RecipeAdapter;
+import com.example.android.bakeandcake.models.Component;
+import com.example.android.bakeandcake.models.Ingredients;
+import com.example.android.bakeandcake.models.Steps;
 
 import org.json.JSONArray;
 import org.json.JSONException;

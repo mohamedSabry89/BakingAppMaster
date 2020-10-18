@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -17,7 +16,7 @@
             android:layout_height="300dp" />
 
         <TextView
-            android:id="@+id/step_detail_text_view"
+            android:id="@+id/tv_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -29,24 +28,24 @@
             android:orientation="horizontal">
 
             <Button
-                android:layout_marginRight="16dp"
-                android:id="@+id/previousButton"
+                android:id="@+id/previous_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:background="#DF418BC6"
-                android:textColor="#0D0C0A"
                 android:text="@string/previous"
-                android:layout_marginEnd="16dp" />
+                android:textColor="#0D0C0A" />
 
             <Button
-                android:layout_marginLeft="16dp"
-                android:id="@+id/nextButton"
+                android:id="@+id/next_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/next"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
                 android:background="#DF418BC6"
-                android:textColor="#0D0C0A"
-                android:layout_marginStart="16dp" />
+                android:text="@string/next"
+                android:textColor="#0D0C0A" />
 
         </LinearLayout>
 

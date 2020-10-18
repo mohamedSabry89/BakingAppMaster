@@ -1,8 +1,7 @@
-package com.example.android.bakeandcake;
+package com.example.android.bakeandcake.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,10 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.android.bakeandcake.IngredientActivity;
+import com.example.android.bakeandcake.R;
+import com.example.android.bakeandcake.models.Component;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
@@ -31,7 +34,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        View itemView = inflater.inflate(R.layout.recipe_list_item, parent, false);
+        View itemView = inflater.inflate(R.layout.activity_main_list_item, parent, false);
         return new RecipeViewHolder(itemView);
     }
 
@@ -43,9 +46,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final Component component = components.get(position);
         final int id = component.getId();
         final String gettingIngredients = component.getIngredientsList();
-        final ArrayList<Steps> theSteps = new ArrayList<>();
-        Steps steps = new Steps();
 
+        //ArrayList<Steps> theSteps = new ArrayList<>();
+        //Steps steps = theSteps.get(position);
+        //String desc = steps.getDescription();
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
@@ -62,7 +66,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
                 intent.putExtra("steps_list", component.getStepsList());
 
                 Log.d("log", "the id is : " + id);
-                Log.d("log", "the id is : " + position);
+                //Log.d("log", "the desc is : " + desc);
                 Log.d("log", "the steps is : " + component.getStepsList());
                 Log.d("log", "the ingredient is : " + gettingIngredients);
                 Log.d("log", "getting Step List : " + component.getStepsList());
