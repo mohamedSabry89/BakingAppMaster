@@ -28,14 +28,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/previous_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:background="#DF418BC6"
-                android:text="@string/previous"
-                android:textColor="#0D0C0A" />
+            android:id="@+id/previous_button"
+            android:layout_marginRight="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="#DF418BC6"
+            android:text="@string/previous"
+            android:textColor="#0D0C0A" />
 
             <Button
                 android:id="@+id/next_button"

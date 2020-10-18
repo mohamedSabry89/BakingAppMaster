@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     public RecipeAdapter recipeAdapter;
     public RecyclerView recyclerView;
-    public List<Component> componentList = new ArrayList<>();
+    public ArrayList<Component> componentList = new ArrayList<>();
     public Context context;
     private final static String URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
     ArrayList<ArrayList<Steps>> gettingSteps = null;

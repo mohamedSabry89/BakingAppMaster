@@ -52,6 +52,13 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
                 view.getContext().startActivity(intent);
             }
         });
+        //tvSteps = (TextView) holder.theSteps.findViewById(R.id.tv_Steps);
+        holder.theSteps.setText(stepList.getDescription());
+        Log.d("LOG", "lets see : " + stepList.getDescription());
+
+        //tvSteps = (TextView) holder.theSteps.findViewById(R.id.tv_Steps);
+        holder.theSteps.setText(stepList.getShortDescription());
+        Log.d("LOG", "lets see : " + stepList.getShortDescription());
     }
 
     @Override

@@ -22,9 +22,9 @@ import com.example.android.bakeandcake.models.Component;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private Context context;
-    private List<Component> components = new ArrayList<>();
+    private ArrayList<Component> components;
 
-    public RecipeAdapter(Context context, List<Component> components) {
+    public RecipeAdapter(Context context, ArrayList<Component> components) {
         this.context = context;
         this.components = components;
     }
@@ -47,10 +47,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final int id = component.getId();
         final String gettingIngredients = component.getIngredientsList();
 
-        //ArrayList<Steps> theSteps = new ArrayList<>();
-        //Steps steps = theSteps.get(position);
-        //String desc = steps.getDescription();
-
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
 
@@ -64,12 +60,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
                 Intent intent = new Intent(view.getContext(), IngredientActivity.class);
                 intent.putExtra("ingredient_list", gettingIngredients);
                 intent.putExtra("steps_list", component.getStepsList());
-
-                Log.d("log", "the id is : " + id);
-                //Log.d("log", "the desc is : " + desc);
-                Log.d("log", "the steps is : " + component.getStepsList());
-                Log.d("log", "the ingredient is : " + gettingIngredients);
-                Log.d("log", "getting Step List : " + component.getStepsList());
 
                 view.getContext().startActivity(intent);
 
