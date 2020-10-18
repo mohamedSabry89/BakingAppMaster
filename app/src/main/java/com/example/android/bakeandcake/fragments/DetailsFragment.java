@@ -42,14 +42,13 @@ public class DetailsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_detail,container,false);
+        View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
 
         ingredientTextView = (TextView) rootView.findViewById(R.id.tv_ingredients);
 
-        Intent intent = getIntent();
-        String ingredients = intent.getStringExtra("ingredient_list");
-
-        steps = intent.getParcelableArrayListExtra("steps_list");
+        Bundle bundle = getArguments();
+        String ingredients = bundle.getString("ingredient_list");
+        steps = bundle.getParcelable("steps_list");
 
         //new getIngredientsJson().execute();
         ingredientTextView.setText(ingredients);
@@ -61,6 +60,6 @@ public class DetailsFragment extends Fragment {
         stepsAdapter = new StepsAdapter(context, steps);
         recyclerView.setAdapter(stepsAdapter);
 
-
+        return rootView;
     }
 }
