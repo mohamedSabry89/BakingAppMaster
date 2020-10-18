@@ -48,7 +48,6 @@ public class IngredientActivity extends AppCompatActivity {
 
         steps = intent.getParcelableArrayListExtra("steps_list");
 
-        //new getIngredientsJson().execute();
         ingredientTextView.setText(ingredients);
         Log.d("log", "what is wrong1 : " + ingredients);
 

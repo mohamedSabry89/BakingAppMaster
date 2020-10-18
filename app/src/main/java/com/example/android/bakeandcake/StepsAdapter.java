@@ -38,8 +38,8 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         //TextView tvSteps;
         Steps stepList = steps.get(position);
         //tvSteps = (TextView) holder.theSteps.findViewById(R.id.tv_Steps);
-        holder.theSteps.setText(stepList.getDescription());
-        Log.d("LOG", "lets see : " + stepList.getDescription());
+        holder.theSteps.setText(stepList.getShortDescription());
+        Log.d("LOG", "lets see : " + stepList.getShortDescription());
     }
 
     @Override

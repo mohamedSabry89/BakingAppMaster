@@ -19,9 +19,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private Context context;
-    private List<Component> components = new ArrayList<>();
+    private ArrayList<Component> components;
 
-    public RecipeAdapter(Context context, List<Component> components) {
+    public RecipeAdapter(Context context, ArrayList<Component> components) {
         this.context = context;
         this.components = components;
     }
@@ -43,8 +43,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final Component component = components.get(position);
         final int id = component.getId();
         final String gettingIngredients = component.getIngredientsList();
-        final ArrayList<Steps> theSteps = new ArrayList<>();
-        Steps steps = new Steps();
 
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
@@ -63,7 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
                 Log.d("log", "the id is : " + id);
                 Log.d("log", "the id is : " + position);
-                Log.d("log", "the steps is : " + component.getStepsList());
+                Log.d("log", "the steps 1 is : " + component.getStepsList());
                 Log.d("log", "the ingredient is : " + gettingIngredients);
                 Log.d("log", "getting Step List : " + component.getStepsList());
 
