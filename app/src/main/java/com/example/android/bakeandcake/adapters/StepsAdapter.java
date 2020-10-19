@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.StepsActivity;
 import com.example.android.bakeandcake.fragments.StepsFragment;
+import com.example.android.bakeandcake.models.Component;
 import com.example.android.bakeandcake.models.Steps;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
 
         Steps stepList = steps.get(position);
         int thePosition = stepList.getStepsId();
+        Component component = new Component();
 
         holder.theSteps.setText(stepList.getShortDescription());
 
@@ -50,6 +52,8 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), StepsActivity.class);
                 intent.putExtra("stepList", stepList);
+                intent.putExtra("componentList", component);
+                intent.putExtra("position", position);
                 view.getContext().startActivity(intent);
             }
         });

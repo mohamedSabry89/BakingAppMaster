@@ -1,6 +1,7 @@
 package com.example.android.bakeandcake.fragments;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,30 +12,41 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.models.Component;
 import com.example.android.bakeandcake.models.Steps;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.util.Util;
+
+import java.util.Objects;
 
 public class StepsFragment extends Fragment {
 
     private SimpleExoPlayer player;
     protected PlayerView mPlayerView;
     TextView stepDescription;
-    Component component;
     Steps theSteps;
     int position;
     Uri videoUrl;
+    Component component;
 
     private boolean playWhenReady;
     private int currentWindow = 0;
     private long playbackPosition = 0;
 
+    public static final String CURRENT_WINDOW = "current_window";
+    public static final String PLAY_WHEN_READY = "ready";
+    public static final String PLAYBACK_POSITION = "position";
 
     public StepsFragment() {
     }
@@ -47,9 +59,15 @@ public class StepsFragment extends Fragment {
         if (bundle != null) {
             component = bundle.getParcelable("component_key");
             theSteps = bundle.getParcelable("steps_key");
-            position = bundle.getInt("position_key", 3);
+            position = bundle.getInt("position_key", 0);
         }
-        //theSteps = component.getStepsList().get(position);
+
+        if (savedInstanceState != null) {
+            currentWindow = savedInstanceState.getInt(CURRENT_WINDOW);
+            playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
+            playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
+        }
+
 
         View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
 
@@ -58,16 +76,17 @@ public class StepsFragment extends Fragment {
         Button previousButton = rootView.findViewById(R.id.previous_button);
         stepDescription = rootView.findViewById(R.id.tv_description);
 
-        //videoUrl = Uri.parse(component.getStepsList().get(position).getVideoURL());
-        Log.d("LOG", "the vedio URL : " + videoUrl);
-        //stepDescription.setText(component.getStepsList().get(position).getDescription());
-        //initializePlayer();
+        videoUrl = Uri.parse(theSteps.getVideoURL());
+        Log.d("LOG", "the position URL : " + position);
+        stepDescription.setText(theSteps.getDescription());
+        initializePlayer();
 
         return rootView;
 
     }
 
-  /*  @Override
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
     public void onResume() {
         super.onResume();
         hideSystemUi();
@@ -79,6 +98,7 @@ public class StepsFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void hideSystemUi() {
         mPlayerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -107,14 +127,13 @@ public class StepsFragment extends Fragment {
     }
 
     private void initializePlayer() {
-        player = new SimpleExoPlayer.Builder(getActivity()).build();
+        player = new SimpleExoPlayer.Builder(Objects.requireNonNull(getActivity())).build();
         mPlayerView.setPlayer(player);
         MediaItem mediaItem = MediaItem.fromUri(videoUrl);
         player.setMediaItem(mediaItem);
         player.setPlayWhenReady(playWhenReady);
         player.seekTo(currentWindow, playbackPosition);
         player.prepare();
-
     }
 
     private void releasePlayer() {
@@ -125,5 +144,5 @@ public class StepsFragment extends Fragment {
             player.release();
             player = null;
         }
-    }*/
+    }
 }
