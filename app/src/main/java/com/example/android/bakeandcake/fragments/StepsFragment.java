@@ -16,18 +16,13 @@ import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.android.bakeandcake.R;
-import com.example.android.bakeandcake.models.Component;
 import com.example.android.bakeandcake.models.Steps;
-import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.util.Util;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class StepsFragment extends Fragment {
@@ -38,7 +33,7 @@ public class StepsFragment extends Fragment {
     Steps theSteps;
     int position;
     Uri videoUrl;
-    Component component;
+    ArrayList<Steps> steps;
 
     private boolean playWhenReady;
     private int currentWindow = 0;
@@ -57,9 +52,9 @@ public class StepsFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            component = bundle.getParcelable("component_key");
             theSteps = bundle.getParcelable("steps_key");
             position = bundle.getInt("position_key", 0);
+            steps = bundle.getParcelableArrayList("array_steps_key");
         }
 
         if (savedInstanceState != null) {
@@ -68,17 +63,39 @@ public class StepsFragment extends Fragment {
             playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
         }
 
-
         View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
 
         mPlayerView = rootView.findViewById(R.id.player_view);
-        Button nextButton = rootView.findViewById(R.id.next_button);
-        Button previousButton = rootView.findViewById(R.id.previous_button);
         stepDescription = rootView.findViewById(R.id.tv_description);
 
-        videoUrl = Uri.parse(theSteps.getVideoURL());
-        Log.d("LOG", "the position URL : " + position);
-        stepDescription.setText(theSteps.getDescription());
+        Button nextButton = rootView.findViewById(R.id.next_button);
+        nextButton.setOnClickListener(view -> {
+            if (player != null) {
+                player.stop();
+            }
+
+            if (position < steps.size()-1) {
+                position++;
+            }
+            stepDescription.setText(steps.get(position).getDescription());
+            initializePlayer();
+        });
+
+        Button previousButton = rootView.findViewById(R.id.previous_button);
+        previousButton.setOnClickListener(view -> {
+            if (player != null) {
+                player.stop();
+            }
+            if (position != 0) {
+                position--;
+            }
+            stepDescription.setText(steps.get(position).getDescription());
+            initializePlayer();
+        });
+
+        if (steps != null) {
+            stepDescription.setText(steps.get(position).getDescription());
+        }
         initializePlayer();
 
         return rootView;
@@ -127,6 +144,7 @@ public class StepsFragment extends Fragment {
     }
 
     private void initializePlayer() {
+        videoUrl = Uri.parse(steps.get(position).getVideoURL());
         player = new SimpleExoPlayer.Builder(Objects.requireNonNull(getActivity())).build();
         mPlayerView.setPlayer(player);
         MediaItem mediaItem = MediaItem.fromUri(videoUrl);
