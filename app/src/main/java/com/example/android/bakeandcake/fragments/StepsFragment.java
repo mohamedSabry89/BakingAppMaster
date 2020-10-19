@@ -49,7 +49,7 @@ public class StepsFragment extends Fragment {
             theSteps = bundle.getParcelable("steps_key");
             position = bundle.getInt("position_key", 3);
         }
-        theSteps = component.getStepsList().get(position);
+        //theSteps = component.getStepsList().get(position);
 
         View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
 
@@ -58,16 +58,16 @@ public class StepsFragment extends Fragment {
         Button previousButton = rootView.findViewById(R.id.previous_button);
         stepDescription = rootView.findViewById(R.id.tv_description);
 
-        videoUrl = Uri.parse(component.getStepsList().get(position).getVideoURL());
+        //videoUrl = Uri.parse(component.getStepsList().get(position).getVideoURL());
         Log.d("LOG", "the vedio URL : " + videoUrl);
-        stepDescription.setText(component.getStepsList().get(position).getDescription());
-        initializePlayer();
+        //stepDescription.setText(component.getStepsList().get(position).getDescription());
+        //initializePlayer();
 
         return rootView;
 
     }
 
-    @Override
+  /*  @Override
     public void onResume() {
         super.onResume();
         hideSystemUi();
@@ -125,5 +125,5 @@ public class StepsFragment extends Fragment {
             player.release();
             player = null;
         }
-    }
+    }*/
 }

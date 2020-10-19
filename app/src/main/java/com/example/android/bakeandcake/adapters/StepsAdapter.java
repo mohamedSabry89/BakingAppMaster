@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.bakeandcake.R;
+import com.example.android.bakeandcake.StepsActivity;
 import com.example.android.bakeandcake.fragments.StepsFragment;
 import com.example.android.bakeandcake.models.Steps;
 
@@ -47,7 +48,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), StepsFragment.class);
+                Intent intent = new Intent(view.getContext(), StepsActivity.class);
                 intent.putExtra("stepList", stepList);
                 view.getContext().startActivity(intent);
             }

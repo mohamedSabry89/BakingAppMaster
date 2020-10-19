@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".IngredientActivity" />
+        <activity android:name=".StepsActivity" />
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
