@@ -2,15 +2,12 @@ package com.example.android.bakeandcake.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,13 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.bakeandcake.IngredientActivity;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.models.Component;
-import com.example.android.bakeandcake.models.Steps;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private Context context;
     private ArrayList<Component> components;
-    private ArrayList<Steps> theSteps;
 
     public RecipeAdapter(Context context, ArrayList<Component> components) {
         this.context = context;
@@ -48,7 +43,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final Component component = components.get(position);
         final int id = component.getId();
         final String gettingIngredients = component.getIngredientsList();
-        //Steps steps = new Steps();
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
@@ -56,19 +50,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         bakeName.setText(component.getName());
         servings.setText(component.getServings());
 
-        holder.itemView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.itemView.setOnClickListener(view -> {
 
-                Intent intent = new Intent(view.getContext(), IngredientActivity.class);
+            Intent intent = new Intent(view.getContext(), IngredientActivity.class);
 
-                intent.putExtra("ingredient_list_key", gettingIngredients);
-                intent.putExtra("component_list_key", component);
-                //intent.putExtra("steps_list_key", steps);
+            intent.putExtra("ingredient_list_key", gettingIngredients);
+            intent.putExtra("component_list_key", component);
 
-                view.getContext().startActivity(intent);
+            view.getContext().startActivity(intent);
 
-            }
         });
     }
 
@@ -82,7 +72,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView, servingTextView;
-
 
         public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);
