@@ -42,23 +42,15 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         Steps stepList = steps.get(position);
 
         holder.theSteps.setText(stepList.getShortDescription());
-        Log.d("LOG", "lets see : " + stepList.getShortDescription());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), StepsFragment.class);
                 intent.putExtra("stepList", stepList);
                 view.getContext().startActivity(intent);
             }
-        });
-        //tvSteps = (TextView) holder.theSteps.findViewById(R.id.tv_Steps);
-        holder.theSteps.setText(stepList.getDescription());
-        Log.d("LOG", "lets see : " + stepList.getDescription());
-
-        //tvSteps = (TextView) holder.theSteps.findViewById(R.id.tv_Steps);
-        holder.theSteps.setText(stepList.getShortDescription());
-        Log.d("LOG", "lets see : " + stepList.getShortDescription());
+        });*/
     }
 
     @Override

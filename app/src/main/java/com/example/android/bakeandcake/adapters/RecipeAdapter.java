@@ -18,11 +18,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.bakeandcake.IngredientActivity;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.models.Component;
+import com.example.android.bakeandcake.models.Steps;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
     private Context context;
     private ArrayList<Component> components;
+    private ArrayList<Steps> theSteps;
 
     public RecipeAdapter(Context context, ArrayList<Component> components) {
         this.context = context;
@@ -46,6 +48,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final Component component = components.get(position);
         final int id = component.getId();
         final String gettingIngredients = component.getIngredientsList();
+        //Steps steps = new Steps();
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
@@ -58,8 +61,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), IngredientActivity.class);
-                intent.putExtra("ingredient_list", gettingIngredients);
-                intent.putExtra("steps_list", component.getStepsList());
+
+                intent.putExtra("ingredient_list_key", gettingIngredients);
+                intent.putExtra("component_list_key", component);
+                //intent.putExtra("steps_list_key", steps);
 
                 view.getContext().startActivity(intent);
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.bakeandcake.adapters.StepsAdapter;
+import com.example.android.bakeandcake.fragments.DetailsFragment;
 import com.example.android.bakeandcake.fragments.StepsFragment;
 import com.example.android.bakeandcake.models.Component;
 import com.example.android.bakeandcake.models.Steps;
@@ -29,36 +30,45 @@ public class IngredientActivity extends AppCompatActivity {
     Component component;
     Steps theSteps;
     int position;
-
+    String ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_detail);
-
-        ingredientTextView = (TextView) findViewById(R.id.tv_ingredients);
+        setContentView(R.layout.ingredients_activity);
 
         Intent intent = getIntent();
-        String ingredients = intent.getStringExtra("ingredient_list");
+        if (intent != null) {
+            ingredients = intent.getStringExtra("ingredient_list_key");
+            component = intent.getParcelableExtra("component_list_key");
+            theSteps = intent.getParcelableExtra("step_list_key");
+        }
 
-        steps = intent.getParcelableArrayListExtra("steps_list");
+        // Log.d("LOG", " what is the steps 1" + theSteps.getShortDescription());
 
-        ingredientTextView.setText(ingredients);
-        Log.d("log", "what is wrong1 : " + ingredients);
 
-        recyclerView = findViewById(R.id.rv_steps);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        stepsAdapter = new StepsAdapter(context, steps);
-        recyclerView.setAdapter(stepsAdapter);
+        Bundle bundle = new Bundle();
+        bundle.putString("ingredients_key", ingredients);
+        bundle.putParcelable("component_key", component);
+        bundle.putParcelable("steps_key", theSteps);
 
-        /*StepsFragment stepsFragment = new StepsFragment();
-
+        DetailsFragment detailsFragment = new DetailsFragment();
+        detailsFragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.steps_detail_fragment, stepsFragment)
-                .commit();*/
-    }
+                .add(R.id.ingredients_layout, detailsFragment)
+                .commit();
 
+        Bundle bundle1 = new Bundle();
+        bundle1.putParcelable("steps_key", theSteps);
+        bundle1.putParcelable("component_key", component);
+
+        StepsFragment stepsFragment = new StepsFragment();
+        stepsFragment.setArguments(bundle1);
+        FragmentManager fragmentManager1 = getSupportFragmentManager();
+        fragmentManager1.beginTransaction()
+                .add(R.id.ingredients_layout, stepsFragment)
+                .commit();
+    }
 
 }

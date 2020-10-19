@@ -30,10 +30,11 @@ public class DetailsFragment extends Fragment {
     private Context context;
     public RecyclerView.LayoutManager layoutManager;
     TextView ingredientTextView;
+
     Component component;
     Steps theSteps;
     int position;
-
+    String ingredients;
 
     public DetailsFragment() {
     }
@@ -47,17 +48,21 @@ public class DetailsFragment extends Fragment {
         ingredientTextView = (TextView) rootView.findViewById(R.id.tv_ingredients);
 
         Bundle bundle = getArguments();
-        String ingredients = bundle.getString("ingredient_list");
-        steps = bundle.getParcelable("steps_list");
+        if (bundle != null) {
+            ingredients = bundle.getString("ingredients_key");
+            theSteps = bundle.getParcelable("step_key");
+            component = bundle.getParcelable("component_key");
+        }
 
-        //new getIngredientsJson().execute();
+        //Log.d("LOG", " what is the steps" + theSteps.getShortDescription());
+
         ingredientTextView.setText(ingredients);
-        Log.d("log", "what is wrong1 : " + ingredients);
 
         recyclerView = rootView.findViewById(R.id.rv_steps);
+        recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        stepsAdapter = new StepsAdapter(context, steps);
+        stepsAdapter = new StepsAdapter(context, component.getStepsList());
         recyclerView.setAdapter(stepsAdapter);
 
         return rootView;
