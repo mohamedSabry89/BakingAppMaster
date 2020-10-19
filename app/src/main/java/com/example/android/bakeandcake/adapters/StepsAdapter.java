@@ -40,17 +40,18 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     public void onBindViewHolder(@NonNull StepsAdapter.StepsViewHolder holder, int position) {
 
         Steps stepList = steps.get(position);
+        int thePosition = stepList.getStepsId();
 
         holder.theSteps.setText(stepList.getShortDescription());
 
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), StepsFragment.class);
                 intent.putExtra("stepList", stepList);
                 view.getContext().startActivity(intent);
             }
-        });*/
+        });
     }
 
     @Override

@@ -31,9 +31,6 @@ public class IngredientActivity extends AppCompatActivity {
             theSteps = intent.getParcelableExtra("step_list_key");
         }
 
-        // Log.d("LOG", " what is the steps 1" + theSteps.getShortDescription());
-
-
         Bundle bundle = new Bundle();
         bundle.putString("ingredients_key", ingredients);
         bundle.putParcelable("component_key", component);
@@ -49,12 +46,13 @@ public class IngredientActivity extends AppCompatActivity {
         Bundle bundle1 = new Bundle();
         bundle1.putParcelable("steps_key", theSteps);
         bundle1.putParcelable("component_key", component);
+        bundle1.putInt("position_key",position);
 
         StepsFragment stepsFragment = new StepsFragment();
         stepsFragment.setArguments(bundle1);
         FragmentManager fragmentManager1 = getSupportFragmentManager();
         fragmentManager1.beginTransaction()
-                .add(R.id.ingredients_layout, stepsFragment)
+                .replace(R.id.ingredients_layout, stepsFragment)
                 .commit();
     }
 
