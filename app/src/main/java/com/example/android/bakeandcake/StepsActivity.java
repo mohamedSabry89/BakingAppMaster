@@ -17,6 +17,7 @@ public class StepsActivity extends AppCompatActivity {
     int position;
     ArrayList<Steps> steps;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
