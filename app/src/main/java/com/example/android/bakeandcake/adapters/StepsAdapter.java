@@ -21,10 +21,18 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
 
     private Context context;
     private ArrayList<Steps> steps;
+    private ListItemClickListener mOnClickListener;
 
-    public StepsAdapter(Context context, ArrayList<Steps> steps) {
+
+    public StepsAdapter(Context context, ArrayList<Steps> steps, ListItemClickListener mOnClickListener) {
         this.context = context;
         this.steps = steps;
+        this.mOnClickListener = mOnClickListener;
+    }
+
+    public interface ListItemClickListener {
+        void onListItemClick(int mDataset);
+
     }
 
     @NonNull
@@ -50,7 +58,6 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
             intent.putExtra("position", thePosition);
             intent.putExtra("array_list_steps", steps);
             view.getContext().startActivity(intent);
-            Log.d("LOG", "what the steps is " + steps.get(position).getVideoURL());
         });
     }
 
@@ -62,13 +69,18 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         return steps.size();
     }
 
-    public static class StepsViewHolder extends RecyclerView.ViewHolder {
+    public class StepsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView theSteps;
 
         public StepsViewHolder(@NonNull View itemView) {
             super(itemView);
             theSteps = itemView.findViewById(R.id.tv_Steps);
+        }
 
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            mOnClickListener.onListItemClick(position);
         }
     }
 }

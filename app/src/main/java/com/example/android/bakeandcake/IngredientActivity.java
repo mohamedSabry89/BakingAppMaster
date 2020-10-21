@@ -12,12 +12,16 @@ import com.example.android.bakeandcake.fragments.StepsFragment;
 import com.example.android.bakeandcake.models.Component;
 import com.example.android.bakeandcake.models.Steps;
 
-public class IngredientActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class IngredientActivity extends AppCompatActivity implements DetailsFragment.OnImageClickListener {
 
     Component component;
     Steps theSteps;
     int position;
     String ingredients;
+    private boolean mTwoPane;
+    ArrayList<Steps> steps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,14 @@ public class IngredientActivity extends AppCompatActivity {
             theSteps = intent.getParcelableExtra("step_list_key");
         }
 
+        if (findViewById(R.id.steps_layout) != null) {
+            // This LinearLayout will only initially exist in the two-pane tablet case
+            mTwoPane = true;
+
+        } else {
+            mTwoPane = false;
+        }
+
         Bundle bundle = new Bundle();
         bundle.putString("ingredients_key", ingredients);
         bundle.putParcelable("component_key", component);
@@ -40,10 +52,32 @@ public class IngredientActivity extends AppCompatActivity {
         detailsFragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.ingredients_layout, detailsFragment)
+                .replace(R.id.ingredients_layout, detailsFragment)
                 .commit();
 
 
     }
 
+    @Override
+    public void onImageSelected(int position) {
+
+        if (mTwoPane) {
+            // Create two=pane interaction
+            Bundle bundle = new Bundle();
+            // Put this information in a Bundle and attach it to an Intent that will launch an RecipeDetailFragment
+            bundle.putParcelableArrayList("array_steps_key", steps);
+            bundle.putInt("position_key", position);
+
+            StepsFragment stepsFragment = new StepsFragment();
+            stepsFragment.setArguments(bundle);
+
+            //Add the fragment to its container using a FragmentManager and a Transaction
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.steps_layout, stepsFragment)
+                    .commit();
+
+        }
+    }
 }

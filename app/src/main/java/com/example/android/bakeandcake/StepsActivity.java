@@ -13,10 +13,8 @@ import java.util.ArrayList;
 
 public class StepsActivity extends AppCompatActivity {
 
-    Steps theSteps;
     int position;
     ArrayList<Steps> steps;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +23,12 @@ public class StepsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            theSteps = intent.getParcelableExtra("stepList");
             position = intent.getIntExtra("position", 0);
             steps = intent.getParcelableArrayListExtra("array_list_steps");
         }
 
         Bundle bundle1 = new Bundle();
 
-        bundle1.putParcelable("steps_key", theSteps);
         bundle1.putParcelableArrayList("array_steps_key", steps);
         bundle1.putInt("position_key", position);
 
@@ -42,5 +38,6 @@ public class StepsActivity extends AppCompatActivity {
         fragmentManager1.beginTransaction()
                 .replace(R.id.ingredients_layout, stepsFragment)
                 .commit();
+
     }
 }

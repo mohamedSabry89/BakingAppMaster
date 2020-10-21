@@ -13,6 +13,11 @@
         android:layout_weight=".4"
         tools:layout="@layout/fragment_detail" />
 
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/darker_gray" />
+
     <FrameLayout
         android:id="@+id/steps_layout"
         android:layout_width="0dp"
@@ -20,10 +25,7 @@
         android:layout_weight=".6"
         tools:layout="@layout/fragment_steps" />
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/darker_gray" />
+
 
 
 </LinearLayout>
