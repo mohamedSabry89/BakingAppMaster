@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     public final static String B_ARRAY_STEPS_KEY = "array_steps_key";
     public final static String B_POSITION_STEPS_KEY = "position_key";
 
+    public final static String PANE_POSITION = "position";
+    public final static String PANE_ARRAY_LIST_STEP = "array_list_steps";
 
 
     public RecipeAdapter recipeAdapter;

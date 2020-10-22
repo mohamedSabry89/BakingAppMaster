@@ -61,7 +61,6 @@ public class DetailsFragment extends Fragment {
             component = bundle.getParcelable(MainActivity.B_COMPONENT_LIST_KEY);
             ingredients = bundle.getString(MainActivity.B_INGREDIENT_LIST_KEY);
         }
-        Log.d("LOG", "what is wrong :::" + ingredients);
         ingredientTextView.setText(ingredients);
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_steps);
         recyclerView.setHasFixedSize(true);

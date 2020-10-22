@@ -33,7 +33,6 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
             ingredients = intent.getStringExtra(MainActivity.I_INGREDIENT_LIST_KEY);
             component = intent.getParcelableExtra(MainActivity.I_COMPONENT_LIST_KEY);
         }
-        Log.d("LOG", "what is wrong1 :::" + ingredients);
 
         if (findViewById(R.id.steps_layout) != null) {
             // This LinearLayout will only initially exist in the two-pane tablet case
@@ -78,12 +77,12 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
         } else {
 
             Bundle b = new Bundle();
-            b.putParcelableArrayList("array_list_steps", steps);
+            b.putParcelableArrayList(MainActivity.PANE_ARRAY_LIST_STEP, steps);
 
             final Intent intent = new Intent(this, StepsActivity.class);
 
             intent.putExtras(b);
-            intent.putExtra("position", position);
+            intent.putExtra(MainActivity.PANE_POSITION, position);
             startActivity(intent);
         }
     }

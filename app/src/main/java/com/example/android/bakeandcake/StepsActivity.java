@@ -2,6 +2,7 @@ package com.example.android.bakeandcake;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.android.bakeandcake.fragments.StepsFragment;
 import com.example.android.bakeandcake.models.Steps;
@@ -23,8 +24,8 @@ public class StepsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-            position = intent.getIntExtra("position", 0);
-            steps = intent.getParcelableArrayListExtra("array_list_steps");
+            position = intent.getIntExtra(MainActivity.PANE_POSITION, 0);
+            steps = intent.getParcelableArrayListExtra(MainActivity.PANE_ARRAY_LIST_STEP);
         }
 
         Bundle bundle1 = new Bundle();
