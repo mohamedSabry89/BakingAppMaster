@@ -37,7 +37,7 @@ class IngredientRemoteViewsFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public void onDataSetChanged() {
-        component = (List<Component>) Preference.ingredients(mContext);
+        component = Preference.componentList(mContext);
     }
 
     @Override

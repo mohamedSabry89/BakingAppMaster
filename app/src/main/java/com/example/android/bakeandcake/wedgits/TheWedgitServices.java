@@ -25,7 +25,7 @@ public class TheWedgitServices extends IntentService {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void startActionShowRecipes(Context context) {
-        Intent intent = new Intent(context, BakingAppWidget.class);
+        Intent intent = new Intent(context, TheWedgitServices.class);
         intent.setAction(ACTION_SHOW_RECIPES);
         context.startService(intent);
     }

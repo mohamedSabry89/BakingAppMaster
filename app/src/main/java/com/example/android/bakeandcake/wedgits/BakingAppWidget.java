@@ -45,16 +45,13 @@ public class BakingAppWidget extends AppWidgetProvider {
     private static RemoteViews getIngredientsGridRemoteView(Context context){
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baking_app_widget);
 
-        // Set the IngredientWidgetService intent to act as the adapter for the view
         Intent intent = new Intent(context, IngredientsWidgets.class);
         views.setRemoteAdapter(R.id.widget_baking_ingredientlist, intent);
 
-        // Set the RecipeDeListActivity intent to launch when clicked
         Intent appIntent = new Intent(context, MainActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_baking_ingredientlist, appPendingIntent);
 
-        // Handle no data
         views.setEmptyView(R.id.wedgit_linear,0);
 
         return views;
