@@ -20,14 +20,12 @@ import com.example.android.bakeandcake.R;
 public class BakingAppWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
-        //CharSequence widgetText = context.getString(R.string.appwidget_text);
-        // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.baking_app_widget);
-        //views.setTextViewText(R.id.appwidget_text, widgetText);
-        SharedPreferences pref = context.getSharedPreferences("the_preference", Context.MODE_PRIVATE);
-        String recipeName = pref.getString("recipe_name", "");
+        RemoteViews views = getIngredientsGridRemoteView(context);
+
+        SharedPreferences pref = context.getSharedPreferences(MainActivity.SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE);
+        String recipeName = pref.getString(MainActivity.PREFERENCE_RECIPE_NAME, "");
         views.setTextViewText(R.id.recipe_name, recipeName);
-        // Instruct the widget manager to update the widget
+
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 

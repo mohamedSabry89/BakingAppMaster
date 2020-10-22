@@ -23,6 +23,13 @@ public class TheWedgitServices extends IntentService {
         super("TheWedgitServices");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void startActionShowRecipes(Context context) {
+        Intent intent = new Intent(context, BakingAppWidget.class);
+        intent.setAction(ACTION_SHOW_RECIPES);
+        context.startService(intent);
+    }
+
     @Override
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
@@ -34,12 +41,6 @@ public class TheWedgitServices extends IntentService {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void startActionShowRecipes(Context context) {
-        Intent intent = new Intent(context, BakingAppWidget.class);
-        intent.setAction(ACTION_SHOW_RECIPES);
-        context.startService(intent);
-    }
 
     private void handleActionShowRecipes() {
 

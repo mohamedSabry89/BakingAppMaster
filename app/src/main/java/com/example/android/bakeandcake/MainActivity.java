@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // keys for intents and bundles (I for intent) & (B for bundle)
     public final static String I_INGREDIENT_LIST_KEY = "ingredient_list_key";
     public final static String I_COMPONENT_LIST_KEY = "component_list_key";
 
@@ -38,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
     public final static String PANE_POSITION = "position";
     public final static String PANE_ARRAY_LIST_STEP = "array_list_steps";
 
+    public final static String SHARED_PREFERENCE_KEY = "the_preference";
+    public final static String SHARED_PREFERENCE_GSON_KEY = "preferences_key";
+    public final static String PREFERENCE_RECIPE_NAME = "recipe_name";
+    public final static String PREFERENCE_RECIPE_ID = "recipe_id";
 
     public RecipeAdapter recipeAdapter;
     public RecyclerView recyclerView;

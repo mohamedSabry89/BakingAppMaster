@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class IngredientActivity extends AppCompatActivity implements DetailsFragment.OnRecipeClickListener {
 
     Component component;
-    Steps theSteps;
     String ingredients;
     private boolean mTwoPane;
     ArrayList<Steps> steps;

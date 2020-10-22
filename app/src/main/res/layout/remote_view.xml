@@ -8,30 +8,12 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/remotewidget_baking_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        tools:text="4" />
-
-
-    <TextView
-        android:id="@+id/remotewidget_baking_measure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        tools:text="cup" />
-
-    <TextView
-        android:id="@+id/remotewidget_baking_ingredientlist"
+        android:id="@+id/remote_widget_baking_ingredient_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         tools:text="butter" />
+
 </LinearLayout>
