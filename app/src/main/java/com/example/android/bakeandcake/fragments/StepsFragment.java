@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.example.android.bakeandcake.MainActivity;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.models.Steps;
 import com.google.android.exoplayer2.MediaItem;
@@ -30,7 +31,6 @@ public class StepsFragment extends Fragment {
     private SimpleExoPlayer player;
     protected PlayerView mPlayerView;
     TextView stepDescription;
-    Steps theSteps;
     int position;
     Uri videoUrl;
     ArrayList<Steps> steps;
@@ -59,9 +59,8 @@ public class StepsFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            theSteps = bundle.getParcelable("steps_key");
-            position = bundle.getInt("position_key", 0);
-            steps = bundle.getParcelableArrayList("array_steps_key");
+            position = bundle.getInt(MainActivity.B_POSITION_STEPS_KEY, 0);
+            steps = bundle.getParcelableArrayList(MainActivity.B_ARRAY_STEPS_KEY);
         }
 
         View rootView = inflater.inflate(R.layout.fragment_steps, container, false);

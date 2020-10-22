@@ -29,8 +29,8 @@ public class StepsActivity extends AppCompatActivity {
 
         Bundle bundle1 = new Bundle();
 
-        bundle1.putParcelableArrayList("array_steps_key", steps);
-        bundle1.putInt("position_key", position);
+        bundle1.putParcelableArrayList(MainActivity.B_ARRAY_STEPS_KEY, steps);
+        bundle1.putInt(MainActivity.B_POSITION_STEPS_KEY, position);
 
         StepsFragment stepsFragment = new StepsFragment();
         stepsFragment.setArguments(bundle1);

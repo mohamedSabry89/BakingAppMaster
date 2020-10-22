@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.bakeandcake.IngredientActivity;
+import com.example.android.bakeandcake.MainActivity;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.models.Component;
 import com.google.gson.Gson;
@@ -58,7 +59,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         holder.itemView.setOnClickListener(view -> {
 
             sharedPreferences = view.getContext().getSharedPreferences("the_preference", 0);
-            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
 
             Gson gson = new Gson();
 
@@ -70,8 +71,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
             Intent intent = new Intent(view.getContext(), IngredientActivity.class);
 
-            intent.putExtra("ingredient_list_key", gettingIngredients);
-            intent.putExtra("component_list_key", component);
+            intent.putExtra(MainActivity.I_INGREDIENT_LIST_KEY, gettingIngredients);
+            intent.putExtra(MainActivity.I_COMPONENT_LIST_KEY, component);
 
             view.getContext().startActivity(intent);
 

@@ -2,6 +2,7 @@ package com.example.android.bakeandcake.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.android.bakeandcake.MainActivity;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.adapters.StepsAdapter;
 import com.example.android.bakeandcake.models.Component;
@@ -56,10 +58,10 @@ public class DetailsFragment extends Fragment {
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            component = bundle.getParcelable("component_key");
-            ingredients = bundle.getString("ingredients_key");
+            component = bundle.getParcelable(MainActivity.B_COMPONENT_LIST_KEY);
+            ingredients = bundle.getString(MainActivity.B_INGREDIENT_LIST_KEY);
         }
-
+        Log.d("LOG", "what is wrong :::" + ingredients);
         ingredientTextView.setText(ingredients);
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_steps);
         recyclerView.setHasFixedSize(true);

@@ -2,6 +2,7 @@ package com.example.android.bakeandcake;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,10 +30,10 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
 
         Intent intent = getIntent();
         if (intent != null) {
-            ingredients = intent.getStringExtra("ingredient_list_key");
-            component = intent.getParcelableExtra("component_list_key");
-            theSteps = intent.getParcelableExtra("step_list_key");
+            ingredients = intent.getStringExtra(MainActivity.I_INGREDIENT_LIST_KEY);
+            component = intent.getParcelableExtra(MainActivity.I_COMPONENT_LIST_KEY);
         }
+        Log.d("LOG", "what is wrong1 :::" + ingredients);
 
         if (findViewById(R.id.steps_layout) != null) {
             // This LinearLayout will only initially exist in the two-pane tablet case
@@ -43,9 +44,8 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
         }
 
         Bundle bundle = new Bundle();
-        bundle.putString("ingredients_key", ingredients);
-        bundle.putParcelable("component_key", component);
-        bundle.putParcelable("steps_key", theSteps);
+        bundle.putString(MainActivity.B_INGREDIENT_LIST_KEY, ingredients);
+        bundle.putParcelable(MainActivity.B_COMPONENT_LIST_KEY, component);
 
         DetailsFragment detailsFragment = new DetailsFragment();
         detailsFragment.setArguments(bundle);
@@ -63,8 +63,8 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
 
             Bundle bundle = new Bundle();
 
-            bundle.putParcelableArrayList("array_steps_key", steps);
-            bundle.putInt("position_key", position);
+            bundle.putParcelableArrayList(MainActivity.B_ARRAY_STEPS_KEY, steps);
+            bundle.putInt(MainActivity.B_POSITION_STEPS_KEY, position);
 
             StepsFragment stepsFragment = new StepsFragment();
             stepsFragment.setArguments(bundle);

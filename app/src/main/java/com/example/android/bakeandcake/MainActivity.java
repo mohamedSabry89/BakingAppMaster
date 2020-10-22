@@ -26,6 +26,17 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    public final static String I_INGREDIENT_LIST_KEY = "ingredient_list_key";
+    public final static String I_COMPONENT_LIST_KEY = "component_list_key";
+
+    public final static String B_INGREDIENT_LIST_KEY = "ingredient_key";
+    public final static String B_COMPONENT_LIST_KEY = "component_key";
+
+    public final static String B_ARRAY_STEPS_KEY = "array_steps_key";
+    public final static String B_POSITION_STEPS_KEY = "position_key";
+
+
+
     public RecipeAdapter recipeAdapter;
     public RecyclerView recyclerView;
     public ArrayList<Component> componentList = new ArrayList<>();
