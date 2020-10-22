@@ -18,34 +18,22 @@ import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.adapters.StepsAdapter;
 import com.example.android.bakeandcake.models.Component;
 
-public class DetailsFragment extends Fragment implements StepsAdapter.ListItemClickListener {
+public class DetailsFragment extends Fragment {
 
+    OnRecipeClickListener mCallback;
 
-    // Define a new interface OnImageClickListener that triggers a callback in the host activity
-    OnImageClickListener mCallback;
-
-    @Override
-    public void onListItemClick(int mDataset) {
-        mCallback.onImageSelected(mDataset);
+    public interface OnRecipeClickListener {
+        void onRecipeSelected(int position);
     }
 
-    // OnImageClickListener interface, calls a method in the host activity named onImageSelected
-    public interface OnImageClickListener {
-        void onImageSelected(int position);
-    }
-
-    // Override onAttach to make sure that the container activity has implemented the callback
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-
-        // This makes sure that the host activity has implemented the callback interface
-        // If not, it throws an exception
         try {
-            mCallback = (OnImageClickListener) context;
+            mCallback = (OnRecipeClickListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnImageClickListener");
+                    + " must implement OnRecipeClickListener");
         }
     }
 
@@ -73,15 +61,12 @@ public class DetailsFragment extends Fragment implements StepsAdapter.ListItemCl
         }
 
         ingredientTextView.setText(ingredients);
-
         RecyclerView recyclerView = rootView.findViewById(R.id.rv_steps);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        StepsAdapter stepsAdapter = new StepsAdapter(getContext(), component.getStepsList(),this);
+        StepsAdapter stepsAdapter = new StepsAdapter(getContext(), component.getStepsList());
         recyclerView.setAdapter(stepsAdapter);
-       /* recyclerView.setOnClickListener(view -> {
-        });*/
 
         return rootView;
     }

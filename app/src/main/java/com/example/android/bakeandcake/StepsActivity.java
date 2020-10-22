@@ -19,7 +19,7 @@ public class StepsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ingredients_activity);
+        setContentView(R.layout.steps_activity);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -36,7 +36,7 @@ public class StepsActivity extends AppCompatActivity {
         stepsFragment.setArguments(bundle1);
         FragmentManager fragmentManager1 = getSupportFragmentManager();
         fragmentManager1.beginTransaction()
-                .replace(R.id.ingredients_layout, stepsFragment)
+                .replace(R.id.steps_layout, stepsFragment)
                 .commit();
 
     }

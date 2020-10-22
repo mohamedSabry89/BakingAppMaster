@@ -14,11 +14,10 @@ import com.example.android.bakeandcake.models.Steps;
 
 import java.util.ArrayList;
 
-public class IngredientActivity extends AppCompatActivity implements DetailsFragment.OnImageClickListener {
+public class IngredientActivity extends AppCompatActivity implements DetailsFragment.OnRecipeClickListener {
 
     Component component;
     Steps theSteps;
-    int position;
     String ingredients;
     private boolean mTwoPane;
     ArrayList<Steps> steps;
@@ -55,29 +54,37 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
                 .replace(R.id.ingredients_layout, detailsFragment)
                 .commit();
 
-
     }
 
     @Override
-    public void onImageSelected(int position) {
+    public void onRecipeSelected(int position) {
 
         if (mTwoPane) {
-            // Create two=pane interaction
+
             Bundle bundle = new Bundle();
-            // Put this information in a Bundle and attach it to an Intent that will launch an RecipeDetailFragment
+
             bundle.putParcelableArrayList("array_steps_key", steps);
             bundle.putInt("position_key", position);
 
             StepsFragment stepsFragment = new StepsFragment();
             stepsFragment.setArguments(bundle);
 
-            //Add the fragment to its container using a FragmentManager and a Transaction
             FragmentManager fragmentManager = getSupportFragmentManager();
 
             fragmentManager.beginTransaction()
                     .replace(R.id.steps_layout, stepsFragment)
                     .commit();
 
+        } else {
+
+            Bundle b = new Bundle();
+            b.putParcelableArrayList("array_list_steps", steps);
+
+            final Intent intent = new Intent(this, StepsActivity.class);
+
+            intent.putExtras(b);
+            intent.putExtra("position", position);
+            startActivity(intent);
         }
     }
 }

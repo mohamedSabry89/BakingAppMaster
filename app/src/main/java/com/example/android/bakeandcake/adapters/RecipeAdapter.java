@@ -1,7 +1,10 @@
 package com.example.android.bakeandcake.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.android.bakeandcake.IngredientActivity;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.models.Component;
+import com.google.gson.Gson;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 
+    SharedPreferences sharedPreferences;
     private Context context;
     private ArrayList<Component> components;
 
@@ -51,6 +56,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         servings.setText(component.getServings());
 
         holder.itemView.setOnClickListener(view -> {
+
+            sharedPreferences = view.getContext().getSharedPreferences("the_preference", 0);
+            @SuppressLint("CommitPrefEdits") SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            Gson gson = new Gson();
+
+            String json = gson.toJson(component);
+            editor.putString("preferences_key", json);
+            editor.putString("recipe_name", component.getName());
+            editor.putInt("recipe_id", component.getId());
+            editor.apply();
 
             Intent intent = new Intent(view.getContext(), IngredientActivity.class);
 

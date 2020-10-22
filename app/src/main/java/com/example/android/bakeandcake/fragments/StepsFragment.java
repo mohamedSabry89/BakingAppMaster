@@ -50,17 +50,18 @@ public class StepsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            theSteps = bundle.getParcelable("steps_key");
-            position = bundle.getInt("position_key", 0);
-            steps = bundle.getParcelableArrayList("array_steps_key");
-        }
 
         if (savedInstanceState != null) {
             currentWindow = savedInstanceState.getInt(CURRENT_WINDOW);
             playWhenReady = savedInstanceState.getBoolean(PLAY_WHEN_READY);
             playbackPosition = savedInstanceState.getLong(PLAYBACK_POSITION);
+        }
+
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            theSteps = bundle.getParcelable("steps_key");
+            position = bundle.getInt("position_key", 0);
+            steps = bundle.getParcelableArrayList("array_steps_key");
         }
 
         View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
@@ -74,7 +75,7 @@ public class StepsFragment extends Fragment {
                 player.stop();
             }
 
-            if (position < steps.size()-1) {
+            if (position < steps.size() - 1) {
                 position++;
             }
             stepDescription.setText(steps.get(position).getDescription());
