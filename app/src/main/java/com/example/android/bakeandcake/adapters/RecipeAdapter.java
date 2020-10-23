@@ -1,6 +1,7 @@
 package com.example.android.bakeandcake.adapters;
 
 import android.annotation.SuppressLint;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -61,6 +62,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         servings.setText(component.getServings());
 
         holder.itemView.setOnClickListener(view -> {
+
 
             sharedPreferences = view.getContext().getSharedPreferences(MainActivity.SHARED_PREFERENCE_KEY, 0);
             SharedPreferences.Editor editor = sharedPreferences.edit();
