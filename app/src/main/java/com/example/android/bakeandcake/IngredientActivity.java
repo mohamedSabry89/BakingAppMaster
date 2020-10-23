@@ -32,6 +32,7 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
         if (intent != null) {
             ingredients = intent.getStringExtra(MainActivity.I_INGREDIENT_LIST_KEY);
             component = intent.getParcelableExtra(MainActivity.I_COMPONENT_LIST_KEY);
+            steps = intent.getParcelableArrayListExtra(MainActivity.I_COMPONENT_STEP_LIST);
         }
 
         if (findViewById(R.id.steps_layout) != null) {
@@ -76,13 +77,15 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
         } else {
 
             Bundle b = new Bundle();
-            b.putParcelableArrayList(MainActivity.PANE_ARRAY_LIST_STEP, steps);
+            b.putParcelableArrayList(MainActivity.PANE_ARRAY_LIST_STEP, component.getStepsList());
 
             final Intent intent = new Intent(this, StepsActivity.class);
 
             intent.putExtras(b);
             intent.putExtra(MainActivity.PANE_POSITION, position);
             startActivity(intent);
+            Log.d("LOG", "what the steps is 22" + "\n" + position + "\n" + component.getStepsList());
+
         }
     }
 }

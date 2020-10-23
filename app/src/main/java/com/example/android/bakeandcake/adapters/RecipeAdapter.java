@@ -79,6 +79,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
             intent.putExtra(MainActivity.I_INGREDIENT_LIST_KEY, gettingIngredients);
             intent.putExtra(MainActivity.I_COMPONENT_LIST_KEY, component);
+            intent.putExtra(MainActivity.I_COMPONENT_STEP_LIST, component.getStepsList());
 
             view.getContext().startActivity(intent);
 

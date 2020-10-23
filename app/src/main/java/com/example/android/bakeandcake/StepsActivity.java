@@ -33,12 +33,14 @@ public class StepsActivity extends AppCompatActivity {
         bundle1.putParcelableArrayList(MainActivity.B_ARRAY_STEPS_KEY, steps);
         bundle1.putInt(MainActivity.B_POSITION_STEPS_KEY, position);
 
-        StepsFragment stepsFragment = new StepsFragment();
-        stepsFragment.setArguments(bundle1);
-        FragmentManager fragmentManager1 = getSupportFragmentManager();
-        fragmentManager1.beginTransaction()
-                .replace(R.id.steps_layout, stepsFragment)
-                .commit();
+        if (savedInstanceState == null) {
 
+            StepsFragment stepsFragment = new StepsFragment();
+            stepsFragment.setArguments(bundle1);
+            FragmentManager fragmentManager1 = getSupportFragmentManager();
+            fragmentManager1.beginTransaction()
+                    .replace(R.id.steps_layout, stepsFragment)
+                    .commit();
+        }
     }
 }

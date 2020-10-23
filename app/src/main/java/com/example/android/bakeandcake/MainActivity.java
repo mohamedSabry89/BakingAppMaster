@@ -44,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     public final static String PREFERENCE_RECIPE_NAME = "recipe_name";
     public final static String PREFERENCE_RECIPE_ID = "recipe_id";
 
+    public final static String I_COMPONENT_STEP_LIST = "get_component_step_list";
+
     public RecipeAdapter recipeAdapter;
     public RecyclerView recyclerView;
     public ArrayList<Component> componentList = new ArrayList<>();

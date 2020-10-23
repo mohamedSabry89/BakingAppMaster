@@ -20,9 +20,14 @@ import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.adapters.StepsAdapter;
 import com.example.android.bakeandcake.models.Component;
 
-public class DetailsFragment extends Fragment {
+public class DetailsFragment extends Fragment implements StepsAdapter.ListItemClickListener {
 
     OnRecipeClickListener mCallback;
+
+    @Override
+    public void onListItemClick(int mData) {
+        mCallback.onRecipeSelected(mData);
+    }
 
     public interface OnRecipeClickListener {
         void onRecipeSelected(int position);
@@ -66,7 +71,7 @@ public class DetailsFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-        StepsAdapter stepsAdapter = new StepsAdapter(getContext(), component.getStepsList());
+        StepsAdapter stepsAdapter = new StepsAdapter(getContext(), component.getStepsList(),this);
         recyclerView.setAdapter(stepsAdapter);
 
         return rootView;

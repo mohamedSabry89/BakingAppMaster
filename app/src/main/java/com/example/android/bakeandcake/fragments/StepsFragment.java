@@ -64,10 +64,13 @@ public class StepsFragment extends Fragment {
             steps = bundle.getParcelableArrayList(MainActivity.B_ARRAY_STEPS_KEY);
         }
 
+        Log.d("LOG", "what the steps is" + position + "\n" + steps);
+
         mPlayerView = rootView.findViewById(R.id.player_view);
         stepDescription = rootView.findViewById(R.id.tv_description);
 
         videoUrl = Uri.parse(steps.get(position).getVideoURL());
+
         if (steps != null) {
             stepDescription.setText(steps.get(position).getDescription());
         }
