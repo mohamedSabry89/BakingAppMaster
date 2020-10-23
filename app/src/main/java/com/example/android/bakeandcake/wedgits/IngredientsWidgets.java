@@ -24,8 +24,10 @@ public class IngredientsWidgets extends RemoteViewsService {
 class IngredientRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
 
     private Context mContext;
-    private List<Component> component;
-    private List<Ingredients> ingredients;
+    private ArrayList<Component> component;
+    //private List<Ingredients> ingredients;
+
+
 
     public IngredientRemoteViewsFactory(Context applicationContext) {
         mContext = applicationContext;
@@ -55,7 +57,10 @@ class IngredientRemoteViewsFactory implements RemoteViewsService.RemoteViewsFact
 
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.remote_view);
         remoteViews.setTextViewText(R.id.remote_widget_baking_ingredient_list, component.get(position).getIngredientsList());
+        //remoteViews.setTextViewText(R.id.remote_widget_baking_ingredient_list, ingredients.get(position).getIngredient());
         Log.d("LOG", "the ingredients is :::" + component.get(position).getIngredientsList());
+        //Log.d("LOG", "the ingredients is :::" + ingredients.get(position).getIngredient());
+
         //remoteViews.setTextViewText(R.id.remotewidget_baking_ingredientlist, ingredients.get(position).getIngredient());
         //remoteViews.setTextViewText(R.id.remotewidget_baking_quantity, String.valueOf(ingredients.get(position).getQuantity()));
         return remoteViews;

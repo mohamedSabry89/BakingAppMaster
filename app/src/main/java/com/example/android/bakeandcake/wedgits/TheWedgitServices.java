@@ -34,13 +34,11 @@ public class TheWedgitServices extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
-            Log.d("LOG", "what the action is : " + intent.getAction());
             if (ACTION_SHOW_RECIPES.equals(action)) {
                 handleActionShowRecipes();
             }
         }
     }
-
 
     private void handleActionShowRecipes() {
 

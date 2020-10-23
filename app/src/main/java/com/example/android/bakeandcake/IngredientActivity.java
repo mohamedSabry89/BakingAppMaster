@@ -27,6 +27,7 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ingredients_activity);
 
+
         Intent intent = getIntent();
         if (intent != null) {
             ingredients = intent.getStringExtra(MainActivity.I_INGREDIENT_LIST_KEY);
@@ -44,7 +45,6 @@ public class IngredientActivity extends AppCompatActivity implements DetailsFrag
         Bundle bundle = new Bundle();
         bundle.putString(MainActivity.B_INGREDIENT_LIST_KEY, ingredients);
         bundle.putParcelable(MainActivity.B_COMPONENT_LIST_KEY, component);
-
         DetailsFragment detailsFragment = new DetailsFragment();
         detailsFragment.setArguments(bundle);
         FragmentManager fragmentManager = getSupportFragmentManager();

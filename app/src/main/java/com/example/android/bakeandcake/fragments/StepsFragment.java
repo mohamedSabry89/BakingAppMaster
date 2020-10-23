@@ -50,6 +50,7 @@ public class StepsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
 
         if (savedInstanceState != null) {
             currentWindow = savedInstanceState.getInt(CURRENT_WINDOW);
@@ -63,10 +64,14 @@ public class StepsFragment extends Fragment {
             steps = bundle.getParcelableArrayList(MainActivity.B_ARRAY_STEPS_KEY);
         }
 
-        View rootView = inflater.inflate(R.layout.fragment_steps, container, false);
-
         mPlayerView = rootView.findViewById(R.id.player_view);
         stepDescription = rootView.findViewById(R.id.tv_description);
+
+        videoUrl = Uri.parse(steps.get(position).getVideoURL());
+        if (steps != null) {
+            stepDescription.setText(steps.get(position).getDescription());
+        }
+        initializePlayer();
 
         Button nextButton = rootView.findViewById(R.id.next_button);
         nextButton.setOnClickListener(view -> {
@@ -77,6 +82,7 @@ public class StepsFragment extends Fragment {
             if (position < steps.size() - 1) {
                 position++;
             }
+            videoUrl = Uri.parse(steps.get(position).getVideoURL());
             stepDescription.setText(steps.get(position).getDescription());
             initializePlayer();
         });
@@ -89,14 +95,11 @@ public class StepsFragment extends Fragment {
             if (position != 0) {
                 position--;
             }
+            videoUrl = Uri.parse(steps.get(position).getVideoURL());
             stepDescription.setText(steps.get(position).getDescription());
             initializePlayer();
         });
 
-        if (steps != null) {
-            stepDescription.setText(steps.get(position).getDescription());
-        }
-        initializePlayer();
 
         return rootView;
 
@@ -106,7 +109,7 @@ public class StepsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        hideSystemUi();
+        //hideSystemUi();
         if ((Util.SDK_INT < 24 || player == null)) {
             if (playbackPosition != 0 && player != null) {
                 player.seekTo(playbackPosition);
@@ -115,12 +118,12 @@ public class StepsFragment extends Fragment {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+   /* @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void hideSystemUi() {
         mPlayerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }
+    }*/
 
     @Override
     public void onPause() {
@@ -144,7 +147,6 @@ public class StepsFragment extends Fragment {
     }
 
     private void initializePlayer() {
-        videoUrl = Uri.parse(steps.get(position).getVideoURL());
         player = new SimpleExoPlayer.Builder(Objects.requireNonNull(getActivity())).build();
         mPlayerView.setPlayer(player);
         MediaItem mediaItem = MediaItem.fromUri(videoUrl);
