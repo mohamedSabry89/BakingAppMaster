@@ -12,10 +12,12 @@ import com.example.android.bakeandcake.models.Component;
 import java.util.ArrayList;
 
 public class IngredientsWidgets extends RemoteViewsService {
+
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new IngredientRemoteViewsFactory(this.getApplicationContext());
     }
+
 }
 
 class IngredientRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
