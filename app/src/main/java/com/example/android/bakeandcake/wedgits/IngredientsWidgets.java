@@ -6,13 +6,10 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
-import com.example.android.bakeandcake.BuildConfig;
 import com.example.android.bakeandcake.R;
 import com.example.android.bakeandcake.models.Component;
-import com.example.android.bakeandcake.models.Ingredients;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class IngredientsWidgets extends RemoteViewsService {
     @Override

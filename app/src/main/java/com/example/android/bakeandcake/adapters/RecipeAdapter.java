@@ -72,7 +72,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             String json = gson.toJson(component);
             editor.putString(MainActivity.SHARED_PREFERENCE_GSON_KEY, json);
             editor.putString(MainActivity.PREFERENCE_RECIPE_NAME, component.getName());
-            editor.putInt(MainActivity.PREFERENCE_RECIPE_ID, component.getId());
+            editor.putString(MainActivity.PREFERENCE_RECIPE_ID, component.getIngredientsList());
             editor.apply();
 
             TheWedgitServices.startActionShowRecipes(view.getContext());
