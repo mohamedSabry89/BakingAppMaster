@@ -8,12 +8,6 @@
     android:padding="@dimen/widget_margin">
 
     <TextView
-        android:id="@+id/recipe_name"
-        style="@style/HeightAndWidthWrap"
-        android:layout_gravity="center"
-        tools:text="Recipe Name" />
-
-    <TextView
         android:id="@+id/widget_baking_ingredientlist"
         style="@style/HeightAndWidthMatchParent"
         android:dividerHeight="1dp" />

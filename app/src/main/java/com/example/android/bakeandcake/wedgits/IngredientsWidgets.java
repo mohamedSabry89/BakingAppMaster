@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class IngredientsWidgets extends RemoteViewsService {
 
+
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new IngredientRemoteViewsFactory(this.getApplicationContext());
@@ -52,8 +53,9 @@ class IngredientRemoteViewsFactory implements RemoteViewsService.RemoteViewsFact
     @Override
     public RemoteViews getViewAt(int position) {
 
-        RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.remote_view);
-        remoteViews.setTextViewText(R.id.remote_widget_baking_ingredient_list, component.getIngredientsList());
+        RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.baking_app_widget);
+        remoteViews.setTextViewText(R.id.widget_baking_ingredientlist, component.getIngredientsList());
+        Log.d("LOG", "component preference" + "\n" + component);
 
         return remoteViews;
 

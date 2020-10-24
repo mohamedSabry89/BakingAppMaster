@@ -54,7 +54,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final Component component = components.get(position);
         final String desc = components.get(position).getIngredientsList();
         final String gettingIngredients = component.getIngredientsList();
-        
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);
@@ -69,10 +68,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
             Gson gson = new Gson();
 
-            String json = gson.toJson(component.getIngredientsList());
+            String json = gson.toJson(component);
             editor.putString(MainActivity.SHARED_PREFERENCE_GSON_KEY, json);
             editor.putString(MainActivity.PREFERENCE_RECIPE_NAME, component.getName());
-            editor.putString(MainActivity.PREFERENCE_RECIPE_ID, component.getIngredientsList());
+            editor.putString(MainActivity.PREFERENCE_RECIPE_ID, gettingIngredients);
             editor.apply();
 
             TheWedgitServices.startActionShowRecipes(view.getContext());

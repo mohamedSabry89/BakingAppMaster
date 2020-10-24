@@ -13,8 +13,10 @@ import java.util.List;
 
 class Preference {
 
+    public static SharedPreferences pref;
+
     public static Component componentList(Context context) {
-        SharedPreferences pref = context.getSharedPreferences(MainActivity.SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE);
+        pref = context.getSharedPreferences(MainActivity.SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE);
         Gson gson = new Gson();
         String json = pref.getString(MainActivity.SHARED_PREFERENCE_GSON_KEY, "");
         return gson.fromJson(json, Component.class);

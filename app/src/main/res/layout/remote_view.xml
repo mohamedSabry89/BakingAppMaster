@@ -4,15 +4,24 @@
     android:id="@+id/remote_view_layout"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:layout_gravity="center_horizontal"
-    android:orientation="horizontal">
+    android:layout_gravity="center"
+    android:background="#FFEB3B"
+    android:orientation="vertical">
 
     <TextView
+        android:id="@+id/recipe_name"
+        style="@style/HeightAndWidthWrap"
+        android:layout_gravity="center"
+        android:textColor="@color/colorPrimary"
+        tools:text="Recipe Name" />
+
+    <ListView
         android:id="@+id/remote_widget_baking_ingredient_list"
         style="@style/HeightAndWidthWrap"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:textColor="@color/colorPrimary"
         tools:text="butter" />
 
 </LinearLayout>
