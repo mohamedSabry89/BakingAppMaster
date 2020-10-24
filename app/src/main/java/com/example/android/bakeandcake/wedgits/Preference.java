@@ -7,10 +7,6 @@ import com.example.android.bakeandcake.MainActivity;
 import com.example.android.bakeandcake.models.Component;
 import com.google.gson.Gson;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
 class Preference {
 
     public static SharedPreferences pref;
