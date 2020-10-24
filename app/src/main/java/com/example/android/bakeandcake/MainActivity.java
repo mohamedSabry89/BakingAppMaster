@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                         ingredients1.setMeasure(ingObject.getString("measure"));
                         ingredients1.setIngredient(ingObject.getString("ingredient"));
 
-                        theIngredients.append(ingredients1.getQuantity()).append(" ").append(ingredients1.getMeasure()).append("\n").append(ingredients1.getIngredient()).append("\n");
+                        theIngredients.append(ingredients1.getQuantity()).append(" ").append(ingredients1.getMeasure()).append(" ").append(ingredients1.getIngredient()).append("\n");
                     }
                     component.setIngredientsList(theIngredients.toString());
 

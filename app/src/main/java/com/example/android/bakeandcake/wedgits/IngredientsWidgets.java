@@ -47,7 +47,7 @@ class IngredientRemoteViewsFactory implements RemoteViewsService.RemoteViewsFact
 
     @Override
     public int getCount() {
-        return componentArrayList.size();
+        return 1;
     }
 
     @Override
@@ -55,7 +55,6 @@ class IngredientRemoteViewsFactory implements RemoteViewsService.RemoteViewsFact
 
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.baking_app_widget);
         remoteViews.setTextViewText(R.id.widget_baking_ingredientlist, component.getIngredientsList());
-        Log.d("LOG", "component preference" + "\n" + component);
 
         return remoteViews;
 
