@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/remote_view_layout"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="#FFEB3B"
@@ -15,12 +15,13 @@
         android:textColor="@color/colorPrimary"
         tools:text="Recipe Name" />
 
-    <ListView
+    <TextView
         android:id="@+id/remote_widget_baking_ingredient_list"
-        style="@style/HeightAndWidthWrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:textColor="@color/colorPrimary"
         tools:text="butter" />
 

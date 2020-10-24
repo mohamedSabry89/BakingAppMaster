@@ -24,8 +24,8 @@ public class BakingAppWidget extends AppWidgetProvider {
         SharedPreferences pref = context.getSharedPreferences(MainActivity.SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE);
         String recipeName = pref.getString(MainActivity.PREFERENCE_RECIPE_NAME, "");
         views.setTextViewText(R.id.recipe_name, recipeName);
-        //String ingredients = pref.getString(MainActivity.PREFERENCE_RECIPE_ID, "");
-        //views.setTextViewText(R.id.widget_baking_ingredientlist, ingredients);
+        String ingredients = pref.getString(MainActivity.PREFERENCE_RECIPE_ID, "");
+        views.setTextViewText(R.id.remote_widget_baking_ingredient_list, ingredients);
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
@@ -46,11 +46,11 @@ public class BakingAppWidget extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.remote_view);
 
         Intent intent = new Intent(context, IngredientsWidgets.class);
-        views.setRemoteAdapter(R.id.remote_widget_baking_ingredient_list, intent);
+        views.setRemoteAdapter(R.id.widget_baking_ingredientlist, intent);
 
         Intent appIntent = new Intent(context, MainActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setPendingIntentTemplate(R.id.remote_widget_baking_ingredient_list, appPendingIntent);
+        views.setPendingIntentTemplate(R.id.widget_baking_ingredientlist, appPendingIntent);
 
         views.setEmptyView(R.id.remote_view_layout, 0);
 

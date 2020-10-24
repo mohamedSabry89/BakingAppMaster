@@ -45,7 +45,7 @@ public class TheWedgitServices extends IntentService {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(this, BakingAppWidget.class));
 
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_baking_ingredientlist);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.remote_widget_baking_ingredient_list);
 
         //Now update all widgets
         BakingAppWidget.updateWidgets(this, appWidgetManager, appWidgetIds);
