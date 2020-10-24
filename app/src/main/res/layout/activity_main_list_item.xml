@@ -9,12 +9,9 @@
 
     <TextView
         android:id="@+id/serving"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextViewsAppearance"
         android:layout_gravity="center_vertical"
-        android:text="@string/servings"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        tools:text="@string/servings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/reciep_name"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,32 +19,26 @@
 
     <TextView
         android:id="@+id/reciep_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        style="@style/TextViewsAppearance"
         app:layout_constraintBottom_toTopOf="@+id/serving"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:text="Hello World!" />
+        tools:text="Hello World!" />
 
     <TextView
         android:id="@+id/serving_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/TextViewsAppearance"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/serving"
         app:layout_constraintStart_toEndOf="@+id/serving"
         app:layout_constraintTop_toTopOf="@+id/serving"
         app:layout_constraintVertical_bias="1.0"
-        android:text="8" />
+        tools:text="8" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

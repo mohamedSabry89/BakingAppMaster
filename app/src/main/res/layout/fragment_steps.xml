@@ -7,8 +7,7 @@
     <LinearLayout
         android:layout_marginTop="30dp"
         android:id="@+id/liner_layout_root"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/HeightAndWidthMatchParent"
         android:orientation="vertical">
 
         <com.google.android.exoplayer2.ui.PlayerView
@@ -33,22 +32,20 @@
             <Button
             android:id="@+id/previous_button"
             android:layout_marginRight="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/HeightAndWidthWrap"
             android:layout_marginEnd="16dp"
-            android:background="#DF418BC6"
+            android:background="@color/buttonColor"
             android:text="@string/previous"
-            android:textColor="#0D0C0A" />
+            android:textColor="@color/buttonTextColor" />
 
             <Button
                 android:id="@+id/next_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/HeightAndWidthWrap"
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:background="#DF418BC6"
+                android:background="@color/buttonColor"
                 android:text="@string/next"
-                android:textColor="#0D0C0A" />
+                android:textColor="@color/buttonTextColor" />
 
         </LinearLayout>
 
