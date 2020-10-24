@@ -54,6 +54,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         final Component component = components.get(position);
         final String desc = components.get(position).getIngredientsList();
         final String gettingIngredients = component.getIngredientsList();
+        
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
         servings = (TextView) holder.servingTextView.findViewById(R.id.serving_number);

@@ -1,5 +1,6 @@
 package com.example.android.bakeandcake.fragments;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -108,12 +109,11 @@ public class StepsFragment extends Fragment {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    public void onResume() {
-        super.onResume();
-        //hideSystemUi();
-        if ((Util.SDK_INT < 24 || player == null)) {
+    public void onStart() {
+        super.onStart();
+        if (Util.SDK_INT > 23) {
+            // initialize player
             if (playbackPosition != 0 && player != null) {
                 player.seekTo(playbackPosition);
             }
@@ -121,17 +121,30 @@ public class StepsFragment extends Fragment {
         }
     }
 
-   /* @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onResume() {
+        super.onResume();
+        hideSystemUi();
+        if ((Util.SDK_INT <= 23 || player == null)) {
+            if (playbackPosition != 0 && player != null) {
+                player.seekTo(playbackPosition);
+            }
+            initializePlayer();
+        }
+    }
+
+    @SuppressLint("InlinedApi")
     private void hideSystemUi() {
         mPlayerView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-    }*/
+    }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (player != null) {
+        if (Util.SDK_INT <= 23) {
             player.stop();
             playbackPosition = player.getCurrentPosition();
             releasePlayer();
@@ -141,11 +154,10 @@ public class StepsFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        if (Util.SDK_INT < 24) {
-            initializePlayer();
-            if (playbackPosition != 0) {
-                player.seekTo(playbackPosition);
-            }
+        if (Util.SDK_INT > 24) {
+            player.stop();
+            playbackPosition = player.getCurrentPosition();
+            releasePlayer();
         }
     }
 
@@ -167,5 +179,12 @@ public class StepsFragment extends Fragment {
             player.release();
             player = null;
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle currentState) {
+        currentState.putInt(CURRENT_WINDOW, currentWindow);
+        currentState.putBoolean(PLAY_WHEN_READY, playWhenReady);
+        currentState.putLong(PLAYBACK_POSITION, playbackPosition);
     }
 }

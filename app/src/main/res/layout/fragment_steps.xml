@@ -2,23 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_marginTop="30dp"
         android:id="@+id/liner_layout_root"
         style="@style/HeightAndWidthMatchParent"
         android:orientation="vertical">
 
         <com.google.android.exoplayer2.ui.PlayerView
             android:id="@+id/player_view"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            app:fastforward_increment="1000"
+            app:rewind_increment="1000"
             android:layout_height="350dp" />
 
         <TextView
             android:id="@+id/tv_description"
             android:textStyle="bold"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
