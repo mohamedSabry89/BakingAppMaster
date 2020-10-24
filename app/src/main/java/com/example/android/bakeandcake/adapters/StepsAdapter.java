@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.android.bakeandcake.MainActivity;
@@ -70,11 +71,13 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
 
     public class StepsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView theSteps;
+        CardView cardView;
 
         public StepsViewHolder(@NonNull View itemView) {
 
             super(itemView);
             theSteps = itemView.findViewById(R.id.tv_Steps);
+            cardView = itemView.findViewById(R.id.card_view);
             itemView.setOnClickListener(this);
 
         }

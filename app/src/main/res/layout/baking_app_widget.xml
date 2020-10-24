@@ -14,7 +14,7 @@
         android:layout_gravity="center"
         tools:text="Recipe Name" />
 
-    <ListView
+    <TextView
         android:id="@+id/widget_baking_ingredientlist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

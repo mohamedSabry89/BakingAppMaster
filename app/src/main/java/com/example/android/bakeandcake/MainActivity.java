@@ -61,13 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
     @VisibleForTesting
     @NonNull
-    public IdlingResource getIdlingResource() {
+    public SimpleIdlingResource getIdlingResource() {
         if (mIdlingResource == null) {
             mIdlingResource = new SimpleIdlingResource();
         }
         return mIdlingResource;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.rv_reciep);
+        recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

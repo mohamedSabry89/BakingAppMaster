@@ -52,7 +52,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         TextView bakeName, servings;
 
         final Component component = components.get(position);
-        final int id = component.getId();
+        final String desc = components.get(position).getIngredientsList();
         final String gettingIngredients = component.getIngredientsList();
 
         bakeName = (TextView) holder.nameTextView.findViewById(R.id.reciep_name);
@@ -63,13 +63,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         holder.itemView.setOnClickListener(view -> {
 
-
             sharedPreferences = view.getContext().getSharedPreferences(MainActivity.SHARED_PREFERENCE_KEY, 0);
             SharedPreferences.Editor editor = sharedPreferences.edit();
 
             Gson gson = new Gson();
 
-            String json = gson.toJson(component);
+            String json = gson.toJson(component.getIngredientsList());
             editor.putString(MainActivity.SHARED_PREFERENCE_GSON_KEY, json);
             editor.putString(MainActivity.PREFERENCE_RECIPE_NAME, component.getName());
             editor.putString(MainActivity.PREFERENCE_RECIPE_ID, component.getIngredientsList());
@@ -98,6 +97,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView, servingTextView;
+
 
         public RecipeViewHolder(@NonNull View itemView) {
             super(itemView);

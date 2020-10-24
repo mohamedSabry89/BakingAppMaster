@@ -24,6 +24,9 @@ public class BakingAppWidget extends AppWidgetProvider {
         SharedPreferences pref = context.getSharedPreferences(MainActivity.SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE);
         String recipeName = pref.getString(MainActivity.PREFERENCE_RECIPE_NAME, "");
         views.setTextViewText(R.id.recipe_name, recipeName);
+        String ingredients = pref.getString(MainActivity.PREFERENCE_RECIPE_ID, "");
+        views.setTextViewText(R.id.widget_baking_ingredientlist, ingredients);
+
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
